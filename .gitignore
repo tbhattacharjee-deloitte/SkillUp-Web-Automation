@@ -1,3 +1,4 @@
+.gitignore
 target/test-classes/log4j2.xml
-logs/app.log
+logs
 src/test/resources/
