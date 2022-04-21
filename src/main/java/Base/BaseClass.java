@@ -9,6 +9,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Driver;
+import java.time.Duration;
 import java.util.Properties;
 
 public class BaseClass {
@@ -41,5 +42,8 @@ public class BaseClass {
     }
     public static void click(WebElement ele) {
         ele.click();
+    }
+    public static void implicitWait(WebDriver driver, int milsec) {
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(milsec));
     }
 }
