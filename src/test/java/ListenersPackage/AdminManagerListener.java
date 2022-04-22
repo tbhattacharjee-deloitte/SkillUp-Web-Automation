@@ -22,7 +22,7 @@ public class AdminManagerListener extends AdminManagerTest implements ITestListe
 
     @Override
     public void onTestFailure(ITestResult result) {
-        test.log(Status.PASS, result.getMethod().getMethodName() + " failed");
+        test.log(Status.FAIL, result.getMethod().getMethodName() + " failed");
         ITestListener.super.onTestFailure(result);
     }
 

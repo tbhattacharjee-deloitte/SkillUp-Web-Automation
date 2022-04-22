@@ -5,11 +5,14 @@ import ListenersPackage.AdminManagerListener;
 import Page.Login;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeTest;
@@ -17,11 +20,16 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 
 @Listeners(AdminManagerListener.class)
 public class AdminManagerTest {
     WebDriver driver;
     By profileDivPath = By.xpath("//div[@class='profile']");
+    By manageBtnPath = By.xpath("//a[text() = 'Manage']");
+    String dropdownListPath = "//div[@class='next-to-training']/ul/li";
+
     public ExtentReports extent;
     public ExtentTest test;
     public Logger logger;
@@ -39,13 +47,21 @@ public class AdminManagerTest {
         // login
         Login.login(driver,"mentorAdmin", "abc123");
         // refresh
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(profileDivPath));
+        BaseClass.explicitWait(driver, 5000, profileDivPath);
         driver.navigate().refresh();
-        BaseClass.zoomout(driver);
+        //BaseClass.zoomout(driver);
     }
-    @Test
-    void create_users() {
+    @Test(priority = 1)
+    void validate_manageTab() {
+        // validate if manage tab is present
+        assert driver.findElement(manageBtnPath).getText().equalsIgnoreCase("Manage");
+        BaseClass.click(driver.findElement(manageBtnPath));
 
+        // validate if the dropdown List under manage have all the required tabs
+        List<WebElement> dropDownList = driver.findElements(By.xpath(dropdownListPath));
+        String[] check = {"Users", "Categories", "Skills"};
+        for (int i = 0; i < dropDownList.size(); i++) {
+            assert check[i].equalsIgnoreCase(dropDownList.get(i).getText());
+        }
     }
 }

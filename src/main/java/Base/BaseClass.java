@@ -1,9 +1,12 @@
 package Base;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -45,5 +48,9 @@ public class BaseClass {
     }
     public static void implicitWait(WebDriver driver, int milsec) {
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(milsec));
+    }
+    public static void explicitWait(WebDriver driver, int milsec, By xpath) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(milsec));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(xpath));
     }
 }
