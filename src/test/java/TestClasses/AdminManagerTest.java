@@ -28,10 +28,11 @@ public class AdminManagerTest {
     WebDriver driver;
     By profileDivPath = By.xpath("//div[@class='profile']");
     By manageBtnPath = By.xpath("//a[text() = 'Manage']");
-    String dropdownListPath = "//div[@class='next-to-training']/ul/li";
+    By dropdownListPath = By.xpath("//div[@class='next-to-training']/ul/li");
+    By users = By.xpath("//a[text() = 'Users']");
 
     public ExtentReports extent;
-    public ExtentTest test;
+    public static ExtentTest test;
     public Logger logger;
 
     public AdminManagerTest() {
@@ -47,7 +48,7 @@ public class AdminManagerTest {
         // login
         Login.login(driver,"mentorAdmin", "abc123");
         // refresh
-        BaseClass.explicitWait(driver, 5000, profileDivPath);
+        BaseClass.explicitWait_visibility(driver, 5000, profileDivPath);
         driver.navigate().refresh();
         //BaseClass.zoomout(driver);
     }
@@ -58,10 +59,16 @@ public class AdminManagerTest {
         BaseClass.click(driver.findElement(manageBtnPath));
 
         // validate if the dropdown List under manage have all the required tabs
-        List<WebElement> dropDownList = driver.findElements(By.xpath(dropdownListPath));
+        List<WebElement> dropDownList = driver.findElements(dropdownListPath);
         String[] check = {"Users", "Categories", "Skills"};
+        test.log(Status.INFO, "Validating the buttons under dropdown of Manage Tab");
         for (int i = 0; i < dropDownList.size(); i++) {
             assert check[i].equalsIgnoreCase(dropDownList.get(i).getText());
         }
+    }
+
+    @Test (priority = 2)
+    void userClickability() {
+        BaseClass.expectedWait_toClick(driver, 2000, users);
     }
 }

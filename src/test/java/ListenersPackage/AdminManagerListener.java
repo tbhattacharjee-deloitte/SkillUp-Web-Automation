@@ -9,7 +9,7 @@ import org.testng.ITestResult;
 public class AdminManagerListener extends AdminManagerTest implements ITestListener {
     @Override
     public void onTestStart(ITestResult result) {
-        test = extent.createTest("Create User");
+        test = super.extent.createTest("Validate Manage Tab");
         test.log(Status.INFO, "Starting " + result.getMethod().getMethodName() + " Test");
         ITestListener.super.onTestStart(result);
     }
