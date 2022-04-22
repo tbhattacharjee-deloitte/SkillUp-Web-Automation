@@ -22,6 +22,7 @@ import org.testng.annotations.Test;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 @Listeners(AdminManagerListener.class)
 public class AdminManagerTest {
@@ -55,8 +56,7 @@ public class AdminManagerTest {
     @Test(priority = 1)
     void validate_manageTab() {
         // validate if manage tab is present
-        assert driver.findElement(manageBtnPath).getText().equalsIgnoreCase("Manage");
-        BaseClass.click(driver.findElement(manageBtnPath));
+        BaseClass.expectedWait_toClick(driver, 2000, manageBtnPath);
 
         // validate if the dropdown List under manage have all the required tabs
         List<WebElement> dropDownList = driver.findElements(dropdownListPath);
