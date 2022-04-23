@@ -1,8 +1,10 @@
 package TestClasses;
 
 import Base.BaseClass;
+import Helper.Util;
 import ListenersPackage.AdminManagerListener;
 import Page.Login;
+import Page.Manage.UsersPage;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
@@ -31,6 +33,8 @@ public class AdminManagerTest {
     public static ExtentTest test;
     public Logger logger;
 
+    private UsersPage usersPage;
+
     public AdminManagerTest() {
         extent = new ExtentReports();
         logger = LogManager.getLogger(AdminManagerTest.class.getName());
@@ -44,14 +48,15 @@ public class AdminManagerTest {
         // login
         Login.login(driver,"mentorAdmin", "abc123");
         // refresh
-        BaseClass.explicitWait_visibility(driver, 5000, profileDivPath);
+        Util.explicitWait_visibility(driver, 5000, profileDivPath);
         driver.navigate().refresh();
         //BaseClass.zoomout(driver);
     }
+
     @Test(priority = 1)
     void validate_manageTab() {
         // validate if manage tab is present
-        BaseClass.expectedWait_toClick(driver, 2000, manageBtnPath);
+        Util.expectedWait_toClick(driver, 2000, manageBtnPath);
 
         // validate if the dropdown List under manage have all the required tabs
         List<WebElement> dropDownList = driver.findElements(dropdownListPath);
@@ -60,16 +65,16 @@ public class AdminManagerTest {
         for (int i = 0; i < dropDownList.size(); i++) {
             assert check[i].equalsIgnoreCase(dropDownList.get(i).getText());
         }
+        usersPage = new UsersPage(driver);
     }
 
     @Test (priority = 2)
     void userClickability() {
-        BaseClass.expectedWait_toClick(driver, 2000, users);
+        usersPage.checkUserBtnClikability();
     }
 
     @Test (priority = 3)
     void addUser() {
-//        BaseClass.click(driver.findElement(newUserBtnPath));
-
+        usersPage.adduser();
     }
 }
