@@ -1,11 +1,10 @@
 package Helper;
 
 public class User {
-    public String name, email, username, designation, bio, role, password;
-    public int age, workex;
+    public String name, email, username, designation, bio, role, password, age, workex;;
     public String[] skills;
 
-    public User(String name, String email, String username, String designation, String bio, String role, String password, int age, int workex, String[] skills) {
+    public User(String name, String email, String username, String designation, String bio, int workex, int age, String role, String password, String[] skills) {
         this.name = name;
         this.email = email;
         this.username = username;
@@ -13,8 +12,8 @@ public class User {
         this.bio = bio;
         this.role = role;
         this.password = password;
-        this.age = age;
-        this.workex = workex;
+        this.age = Integer.toString(age);
+        this.workex = Integer.toString(workex);
         this.skills = skills;
     }
 
