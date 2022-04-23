@@ -42,7 +42,7 @@ public class AdminManagerTest {
     }
 
     @BeforeTest
-    void login() {
+    public void login() {
         // initialize driver
         driver = BaseClass.init();
         // login
@@ -54,7 +54,7 @@ public class AdminManagerTest {
     }
 
     @Test(priority = 1)
-    void validate_manageTab() {
+    public void validate_manageTab() {
         // validate if manage tab is present
         Util.expectedWait_toClick(driver, 2000, manageBtnPath);
 
@@ -65,16 +65,22 @@ public class AdminManagerTest {
         for (int i = 0; i < dropDownList.size(); i++) {
             assert check[i].equalsIgnoreCase(dropDownList.get(i).getText());
         }
-        usersPage = new UsersPage(driver);
+        usersPage = new UsersPage(driver, logger);
     }
 
     @Test (priority = 2)
-    void userClickability() {
+    public void userClickability() {
         usersPage.checkUserBtnClikability();
     }
 
     @Test (priority = 3)
-    void addUser() {
+    public void addUser() {
         usersPage.adduser();
+        test.log(Status.INFO, "User added successfully");
+    }
+
+    @Test (priority = 4)
+    public void deleteLastUser() {
+        usersPage.deleteLastUser(test);
     }
 }

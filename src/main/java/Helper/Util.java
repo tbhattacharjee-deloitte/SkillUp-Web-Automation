@@ -21,6 +21,10 @@ public class Util {
         ele.click();
     }
 
+    public static void click(WebDriver driver, By xpath) {
+        click(driver.findElement(xpath));
+    }
+
     public static void jsClick(WebDriver driver, By xpath) {
         JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("arguments[0].click();", driver.findElement(xpath));
