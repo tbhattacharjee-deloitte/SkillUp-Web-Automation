@@ -12,17 +12,11 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-import java.time.Duration;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 @Listeners(AdminManagerListener.class)
 public class AdminManagerTest {
@@ -31,6 +25,7 @@ public class AdminManagerTest {
     By manageBtnPath = By.xpath("//a[text() = 'Manage']");
     By dropdownListPath = By.xpath("//div[@class='next-to-training']/ul/li");
     By users = By.xpath("//a[text() = 'Users']");
+    By newUserBtnPath = By.xpath("//button[contains(text(), 'NEW USER')]");
 
     public ExtentReports extent;
     public static ExtentTest test;
@@ -70,5 +65,11 @@ public class AdminManagerTest {
     @Test (priority = 2)
     void userClickability() {
         BaseClass.expectedWait_toClick(driver, 2000, users);
+    }
+
+    @Test (priority = 3)
+    void addUser() {
+//        BaseClass.click(driver.findElement(newUserBtnPath));
+
     }
 }
