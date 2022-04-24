@@ -88,11 +88,21 @@ public class AdminManagerTest {
 
     @Test (priority = 5)
     public void categoryClikability() {
-        catPage = new CategoriesPage(driver, test);
+        catPage = new CategoriesPage(driver, test, logger);
         catPage.checkUserBtnClikability();
     }
     @Test (priority = 6)
     public void addNewCat() {
         catPage.addNewCat();
+    }
+
+    @Test(priority = 7)
+    public void editLastCart() {
+        catPage.editLastCat();
+    }
+
+    @Test (priority = 8)
+    public void delLastCategory() {
+        catPage.delLastCat();
     }
 }

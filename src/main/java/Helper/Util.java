@@ -47,4 +47,11 @@ public class Util {
     public static By getReplacedXpath(String original, String toReplace) {
         return By.xpath(original.replace("%s", toReplace));
     }
+    public static void threadSleep(int milsec) {
+        try {
+            Thread.sleep(milsec);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

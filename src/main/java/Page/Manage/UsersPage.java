@@ -56,6 +56,7 @@ public class UsersPage {
         Util.click(driver, getReplacedXpath(matOption, user.role));
 
         // select skills
+        Util.threadSleep(3000);
         driver.findElement(By.xpath("//mat-select[@placeholder='Select Skills']")).click();
         for (String skill: user.skills) {
             Util.expectedWait_toClick(driver, 2000, getReplacedXpath(matOption, skill.trim()));
