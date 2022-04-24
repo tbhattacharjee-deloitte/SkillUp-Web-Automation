@@ -9,13 +9,13 @@ import org.openqa.selenium.support.ui.Select;
 public class HomePageTrainee {
     private static By TraineeButton = By.xpath("//*[text()='BECOME A TRAINEE']");
     private static By SelectSkill = By.xpath("//mat-option[@id='mat-option-1']");
-    private static By Bio = By.xpath("//textarea[@placeholder='Enter request details']");
-    private static By StartDate = By.xpath("//input[@class='request-form pp ng-invalid ng-touched ng-dirty']");
-    private static By StartTime = By.xpath("(//*[@class='request-form1 ng-pristine ng-invalid ng-touched'])[1]");
-    private static By EndTime = By.xpath("(//*[@class='request-form1 ng-pristine ng-invalid ng-touched'])[2]");
-    private static By Duration = By.xpath("//input[@class='request-form ng-pristine ng-invalid ng-touched']");
+    private static By Bio = By.xpath("//textarea");
+    private static By StartDate = By.xpath("(//input)[1]");
+    private static By StartTime = By.xpath("(//input)[2]");
+    private static By EndTime = By.xpath("(//input)[3]");
+    private static By Duration = By.xpath("(//input)[4]");
     private static By CreateButton = By.xpath("//*[text()='CREATE']");
-    private static By SearchBox = By.xpath("//input[@id='mat-input-0']");
+    private static By SearchBox = By.xpath("(//input)[1]");
     private static By Info = By.xpath("//*[text()='info']");
     private static By CloseButton = By.xpath("//button[text()='close']");
 
@@ -32,29 +32,31 @@ public class HomePageTrainee {
     }
 
 
-    public static String EnterBio(WebDriver driver, String bio){
+    public static void EnterBio(WebDriver driver, String bio){
         ((JavascriptExecutor)driver).executeScript("arguments[0].value='"+bio+"';",driver.findElement(Bio));
-        return bio;
     }
 
-    public static void EnterStartDate(WebDriver driver){
-        driver.findElement(StartDate).sendKeys("05122022");
+    public static void EnterStartDate(WebDriver driver, String date){
+        driver.findElement(StartDate).sendKeys(date);
+//        ((JavascriptExecutor)driver).executeScript("arguments[0].value = '05/15/2022';", driver.findElement(StartDate));
     }
 
     public static void EnterStartTime(WebDriver driver, String sTime){
         driver.findElement(StartTime).sendKeys(sTime);
+//        ((JavascriptExecutor)driver).executeScript("arguments[0].value = '"+sTime+"';", driver.findElement(StartTime));
     }
 
     public static void EnterEndTime(WebDriver driver, String eTime){
         driver.findElement(EndTime).sendKeys(eTime);
+//        ((JavascriptExecutor)driver).executeScript("arguments[0].value = '"+eTime+"';", driver.findElement(EndTime));
     }
 
     public static void EnterDuration(WebDriver driver, String duration){
-        driver.findElement(Duration).sendKeys(duration);
+        ((JavascriptExecutor)driver).executeScript("arguments[0].value = '"+duration+"';", driver.findElement(Duration));
     }
 
     public static void ClickCreateButton(WebDriver driver){
-        driver.findElement(CreateButton).click();
+        ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(CreateButton));
     }
 
     public static void SearchUser(WebDriver driver, String searchKey){
