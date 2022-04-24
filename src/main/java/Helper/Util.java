@@ -44,4 +44,7 @@ public class Util {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(2000));
         wait.until(ExpectedConditions.elementToBeClickable(xpath)).click();
     }
+    public static By getReplacedXpath(String original, String toReplace) {
+        return By.xpath(original.replace("%s", toReplace));
+    }
 }

@@ -4,6 +4,7 @@ import Base.BaseClass;
 import Helper.Util;
 import ListenersPackage.AdminManagerListener;
 import Page.Login;
+import Page.Manage.CategoriesPage;
 import Page.Manage.UsersPage;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
@@ -34,6 +35,7 @@ public class AdminManagerTest {
     public Logger logger;
 
     private UsersPage usersPage;
+    private CategoriesPage catPage;
 
     public AdminManagerTest() {
         extent = new ExtentReports();
@@ -82,5 +84,15 @@ public class AdminManagerTest {
     @Test (priority = 4)
     public void deleteLastUser() {
         usersPage.deleteLastUser(test);
+    }
+
+    @Test (priority = 5)
+    public void categoryClikability() {
+        catPage = new CategoriesPage(driver, test);
+        catPage.checkUserBtnClikability();
+    }
+    @Test (priority = 6)
+    public void addNewCat() {
+        catPage.addNewCat();
     }
 }
