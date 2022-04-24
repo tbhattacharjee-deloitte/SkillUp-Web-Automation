@@ -12,7 +12,7 @@ import java.time.Duration;
 public class Util {
     public static void zoomout(WebDriver driver) {
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("document.body.style.zoom='90%'");
+        js.executeScript("document.body.style.zoom='70%'");
     }
     public static void sendKey(WebElement ele, String key) {
         ele.sendKeys(key);
