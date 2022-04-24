@@ -43,17 +43,17 @@ public class UsersPage {
         User user = ExtractData.getSingleUser(); // Data Extraction
 
         // filling addUser form
-        Util.sendKey(driver.findElement(getReplacedXpath(ipGenPath,"Enter name here")), user.name);
-        Util.sendKey(driver.findElement(getReplacedXpath(ipGenPath, "Enter email id")), user.email);
-        Util.sendKey(driver.findElement(getReplacedXpath(ipGenPath, "Enter username")), user.username);
-        Util.sendKey(driver.findElement(getReplacedXpath(ipGenPath, "Enter your age")), user.age);
-        Util.sendKey(driver.findElement(getReplacedXpath(ipGenPath, "Enter your designation")), user.designation);
-        Util.sendKey(driver.findElement(getReplacedXpath(ipGenPath, "Enter a bio")), user.bio);
-        Util.sendKey(driver.findElement(getReplacedXpath(ipGenPath, "Enter your working experience")), user.workex);
-        Util.sendKey(driver.findElement(getReplacedXpath(ipGenPath, "Enter password")), user.password);
+        Util.sendKey(driver, getReplacedXpath(ipGenPath,"Enter name here"), user.name);
+        Util.sendKey(driver, getReplacedXpath(ipGenPath, "Enter email id"), user.email);
+        Util.sendKey(driver, getReplacedXpath(ipGenPath, "Enter username"), user.username);
+        Util.sendKey(driver, getReplacedXpath(ipGenPath, "Enter your age"), user.age);
+        Util.sendKey(driver, getReplacedXpath(ipGenPath, "Enter your designation"), user.designation);
+        Util.sendKey(driver, getReplacedXpath(ipGenPath, "Enter a bio"), user.bio);
+        Util.sendKey(driver, getReplacedXpath(ipGenPath, "Enter your working experience"), user.workex);
+        Util.sendKey(driver, getReplacedXpath(ipGenPath, "Enter password"), user.password);
         // Role drop down
-        Util.click(driver.findElement(getReplacedXpath(ipGenPath, "Select Role")));
-        Util.click(driver.findElement(getReplacedXpath(matOption, user.role)));
+        Util.click(driver, getReplacedXpath(ipGenPath, "Select Role"));
+        Util.click(driver, getReplacedXpath(matOption, user.role));
 
         // select skills
         driver.findElement(By.xpath("//mat-select[@placeholder='Select Skills']")).click();
@@ -64,21 +64,20 @@ public class UsersPage {
         action.click(driver.findElement(By.xpath("//label[contains(text(), 'Skills')]"))).perform();
         // create user
         Util.click(driver.findElement(createUserXpath));
-        Util.implicitWait(driver, 5000);
     }
 
     public void deleteLastUser(ExtentTest test) {
         test.log(Status.INFO, "deleting last user");
-        while (true) {
-            String[] s = driver.findElement(pageDataxpath).getText().trim().split(" ");
-            logger.debug("Checking str array: "+ Arrays.toString(s));
-            if (s[2].equals(s[4])) break;
-            Util.click(driver, nxtPageXpath);
-        }
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
+        }
+        while (true) {
+            String[] s = driver.findElement(pageDataxpath).getText().trim().split(" ");
+            logger.debug("Checking str array: "+ Arrays.toString(s));
+            if (s[2].equals(s[4])) break;
+            Util.jsClick(driver, nxtPageXpath);
         }
         List<WebElement> lst = driver.findElements(delXpath);
         assert lst.size() > 0;

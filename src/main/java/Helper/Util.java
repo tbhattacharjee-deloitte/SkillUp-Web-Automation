@@ -17,6 +17,9 @@ public class Util {
     public static void sendKey(WebElement ele, String key) {
         ele.sendKeys(key);
     }
+    public static void sendKey(WebDriver driver, By xpath, String key) {
+        sendKey(driver.findElement(xpath), key);
+    }
     public static void click(WebElement ele) {
         ele.click();
     }
