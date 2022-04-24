@@ -29,17 +29,21 @@ public class Trainer_HomePage {
     static By accept_btn = By.xpath("//button[normalize-space()='Accept']");
 
 
-
+//Function to log in to user account
     public static void login(WebDriver driver, String username, String password){
 
+        //Entering username and password
         Util.sendKey(driver.findElement(loginXpath), username);
         Util.sendKey(driver.findElement(passwordXpath), password);
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
+
+        //Clicking on submit and then zoomout
         Util.click(driver.findElement(By.xpath("/html/body/app-root/app-login-page/div/form/div/div[3]")));
         Util.zoomout(driver);
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
     }
 
+    //Navigating to Become a trainer page
     public static void goto_trainer(WebDriver driver){
         Util.jsClick(driver,become_trainer);
         driver.navigate().refresh();
@@ -48,18 +52,30 @@ public class Trainer_HomePage {
 
     }
 
+    //Selecting the number of data to be displayed on the screen
     public static void initiation(WebDriver driver,By initiation_number,int number) throws InterruptedException {
         Util.zoomout(driver);
+
+        // dropdown button
         Util.jsClick(driver,initiation);
-        Thread.sleep(3000);
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
+
+//        Thread.sleep(3000);
+
+        //selecting the number from dropdown
         Util.jsClick(driver,initiation_number);
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
+
         Thread.sleep(3000);
 
+
+        //zoom-out to fit the data in the screen
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("document.body.style.zoom='40%'");
 
-        String range = driver.findElement(pagination_range).getText();
 
+        //validating the number of data being displaying
+        String range = driver.findElement(pagination_range).getText();
         int total = Integer.parseInt(range.substring(range.length()-2).strip());
 
         if(total > number){
@@ -74,9 +90,12 @@ public class Trainer_HomePage {
         }
     }
 
+
+    //Testing the search box functionality
     public static void search(WebDriver driver,String search_name,String head){
         Util.sendKey(driver.findElement(search_box), search_name);
 
+        // Checking the search name functionality
         if(head.equals("name")) {
             String appearing_name = driver.findElement(first_name).getText();
             System.out.println(appearing_name);
@@ -87,6 +106,8 @@ public class Trainer_HomePage {
             }
         }
 
+
+        // Checking the search skill functionality
         if(head.equals("skill")){
             String appearing_name = driver.findElement(skill_name).getText();
             System.out.println(appearing_name);
@@ -98,14 +119,21 @@ public class Trainer_HomePage {
         }
     }
 
+
+    //Checking the next and previous buttons
     public static void navigate(WebDriver driver,String nav) throws InterruptedException {
 
         String range = driver.findElement(pagination_range).getText();
         int total = Integer.parseInt(range.substring(range.length()-2).strip());
 
+
         if (total > 5) {
+
+            //Next Page button
             if (nav.equals("next")) {
                 Util.jsClick(driver, next_page_btn);
+                driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
+
                 Thread.sleep(3000);
                 int num = Integer.parseInt((driver.findElement(pagination_range).getText()).substring(0, 1));
                 if (num == 6) {
@@ -115,8 +143,12 @@ public class Trainer_HomePage {
                 }
             }
 
+
+            // Previous Page button
             if (nav.equals("prev")) {
                 Util.jsClick(driver, prev_page_btn);
+                driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
+
                 Thread.sleep(3000);
                 int num = Integer.parseInt((driver.findElement(pagination_range).getText()).substring(0, 1));
                 if (num == 1) {
@@ -128,22 +160,28 @@ public class Trainer_HomePage {
         }
     }
 
-    public static void accept_skill(WebDriver driver) throws InterruptedException {
+
+    // Accept skill to train functionality
+    public static void accept_skill(WebDriver driver, String name) throws InterruptedException {
+
         Util.jsClick(driver, info_btn);
-        Thread.sleep(3000);
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
+
+//        Thread.sleep(3000);
         Boolean accept_true = driver.findElement(accept_btn).isDisplayed();
         System.out.println(accept_true);
 
-        if(accept_true == true){
-            Util.jsClick(driver,accept_btn);
-        }
-        else{
+        if (accept_true == true) {
+            Util.jsClick(driver, accept_btn);
+        } else {
             System.out.println("Fail");
         }
 
     }
 
 
+
+    // Delete the user's skill request
     public static void delete_skill_req(WebDriver driver,String name) throws InterruptedException {
         Util.sendKey(driver.findElement(search_box), name);
 
@@ -152,6 +190,8 @@ public class Trainer_HomePage {
 
         if(del_present.equals("true")){
             Util.jsClick(driver,del_btn);
+            driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
+
             Thread.sleep(3000);
 
             Util.jsClick(driver,del_yes);

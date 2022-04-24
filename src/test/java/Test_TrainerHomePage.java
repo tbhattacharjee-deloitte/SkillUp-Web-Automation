@@ -19,13 +19,16 @@ public class Test_TrainerHomePage {
     By init_15 = By.xpath("//span[@class='mat-option-text'][normalize-space()='15']");
     String username = "vivek";
     String password = "vivek123";
+    String name = "vivek";
 
 
     @BeforeTest
     void login() throws InterruptedException {
         driver = BaseClass.init();
         Trainer_HomePage.login(driver,username,password);
-        Thread.sleep(3000);
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
+
+//        Thread.sleep(3000);
     }
 
     @Test (priority = 1)
@@ -33,7 +36,9 @@ public class Test_TrainerHomePage {
         Trainer_HomePage.goto_trainer(driver);
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
         driver.navigate().refresh();
-        Thread.sleep(3000);
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
+
+//        Thread.sleep(3000);
         driver.navigate().refresh();
     }
 
@@ -77,7 +82,6 @@ public class Test_TrainerHomePage {
         Util.zoomout(driver);
     }
 
-
     @Test (priority = 7)
     void next_page() throws InterruptedException {
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
@@ -96,7 +100,7 @@ public class Test_TrainerHomePage {
     @Test (priority = 9)
     void accept_skill() throws InterruptedException {
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
-        Trainer_HomePage.accept_skill(driver);
+        Trainer_HomePage.accept_skill(driver,name);
     }
 
 

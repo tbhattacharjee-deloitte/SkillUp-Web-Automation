@@ -16,6 +16,7 @@ public class Test_As_A_Trainer_Page {
     WebDriver driver;
     String username = "vivek";
     String password = "vivek123";
+    String name = "vivek";
 
 
     @BeforeTest
@@ -44,7 +45,6 @@ public class Test_As_A_Trainer_Page {
 
     @Test (priority = 3)
     void search_filter_skill() throws InterruptedException {
-
         Util.zoomout(driver);
         String trainee_name = "Java";
         Thread.sleep(3000);
@@ -53,5 +53,22 @@ public class Test_As_A_Trainer_Page {
         driver.navigate().refresh();
         Util.zoomout(driver);
     }
+
+    @Test (priority = 4)
+    void teach_btn(){
+        As_A_Trainer_Page.teach(driver);
+    }
+
+    @Test (priority = 5)
+    void check_cred(){
+        As_A_Trainer_Page.check_trainer_name(driver,name);
+    }
+
+    @Test (priority = 6)
+    void status_updating(){
+        As_A_Trainer_Page.status_update(driver);
+    }
+
+
 
 }
