@@ -69,6 +69,9 @@ public class Test_As_A_Trainer_Page {
         As_A_Trainer_Page.status_update(driver);
     }
 
-
+    @Test (priority = 7)
+    void adding_reference() throws InterruptedException {
+        As_A_Trainer_Page.add_reference(driver,"youtube","www.youtube.com");
+    }
 
 }

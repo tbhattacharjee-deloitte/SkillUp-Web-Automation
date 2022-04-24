@@ -18,6 +18,10 @@ public class As_A_Trainer_Page {
     static By status_state = By.xpath("//h2[@class='status-state']");
     static By update_status = By.xpath("//button[@class='update-status']");
     static By update_conformation = By.xpath("//button[@class='del-dialog-yes']");
+    static By add_ref = By.xpath("//button[@class='plus']//mat-icon[@role='img']");
+    static By context = By.xpath("//input[@placeholder='Enter context here']");
+    static By reference = By.xpath("//input[@placeholder='Enter reference here']");
+    static By add_ref_btn = By.xpath("//button[@class='req-button']");
 
 
     //Navigate to My training - As a trainer page
@@ -116,6 +120,30 @@ public class As_A_Trainer_Page {
         else{
             System.out.println("Fail");
         }
+    }
+
+
+    public static void add_reference(WebDriver driver, String context_str,String reference_str) throws InterruptedException {
+        Util.jsClick(driver,add_ref);
+
+        Util.sendKey(driver.findElement(context),context_str);
+        Util.sendKey(driver.findElement(reference), reference_str);
+
+        Util.jsClick(driver,add_ref_btn);
+        Thread.sleep(3000);
+
+        String appearing_context = driver.findElement(By.xpath("//div[@class='bar']//h2")).getText();
+        String appearing_reference = driver.findElement(By.xpath("//a[@class='link']")).getText();
+
+
+
+        if((appearing_context.equals(context_str)) && (appearing_reference.equals(reference_str))){
+            System.out.println("Pass");
+        }
+        else{
+            System.out.println("Fail");
+        }
+
     }
 
 
