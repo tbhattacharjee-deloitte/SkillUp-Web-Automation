@@ -23,6 +23,10 @@ public class Trainer_HomePage {
     static By search_box = By.xpath("//input[@id='mat-input-0']");
     static By first_name = By.xpath("//tbody/tr[1]/td[1]");
     static By skill_name = By.xpath("//tbody/tr[1]/td[2]");
+    static By del_btn = By.xpath("//tbody/tr[1]/td[4]/a[1]/mat-icon[2]");
+    static By del_yes = By.xpath("//button[normalize-space()='Yes']");
+    static By info_btn = By.xpath("//tbody/tr[1]/td[4]/a[1]/mat-icon[1]");
+    static By accept_btn = By.xpath("//button[normalize-space()='Accept']");
 
 
 
@@ -68,9 +72,6 @@ public class Trainer_HomePage {
                 System.out.println("Fail");
             }
         }
-
-
-
     }
 
     public static void search(WebDriver driver,String search_name,String head){
@@ -95,7 +96,6 @@ public class Trainer_HomePage {
                 System.out.println("Search Unsuccessful");
             }
         }
-
     }
 
     public static void navigate(WebDriver driver,String nav) throws InterruptedException {
@@ -125,6 +125,36 @@ public class Trainer_HomePage {
                     System.out.println("Unsuccessful");
                 }
             }
+        }
+    }
+
+    public static void accept_skill(WebDriver driver) throws InterruptedException {
+        Util.jsClick(driver, info_btn);
+        Thread.sleep(3000);
+        Boolean accept_true = driver.findElement(accept_btn).isDisplayed();
+        System.out.println(accept_true);
+
+        if(accept_true == true){
+            Util.jsClick(driver,accept_btn);
+        }
+        else{
+            System.out.println("Fail");
+        }
+
+    }
+
+
+    public static void delete_skill_req(WebDriver driver,String name) throws InterruptedException {
+        Util.sendKey(driver.findElement(search_box), name);
+
+        Boolean del_present = driver.findElement(del_btn).isDisplayed();
+        System.out.println("Delete button present : "+del_present);
+
+        if(del_present.equals("true")){
+            Util.jsClick(driver,del_btn);
+            Thread.sleep(3000);
+
+            Util.jsClick(driver,del_yes);
         }
     }
 }

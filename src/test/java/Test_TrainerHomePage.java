@@ -14,16 +14,17 @@ import java.time.Duration;
 public class Test_TrainerHomePage {
     WebDriver driver;
 
-    static By init_5 = By.xpath("//span[@class='mat-option-text'][normalize-space()='5']");
-    static By init_10 = By.xpath("//span[normalize-space()='10']");
-    static By init_15 = By.xpath("//span[@class='mat-option-text'][normalize-space()='15']");
-
+    By init_5 = By.xpath("//span[@class='mat-option-text'][normalize-space()='5']");
+    By init_10 = By.xpath("//span[normalize-space()='10']");
+    By init_15 = By.xpath("//span[@class='mat-option-text'][normalize-space()='15']");
+    String username = "vivek";
+    String password = "vivek123";
 
 
     @BeforeTest
     void login() throws InterruptedException {
         driver = BaseClass.init();
-        Trainer_HomePage.login(driver,"vivek","vivek123");
+        Trainer_HomePage.login(driver,username,password);
         Thread.sleep(3000);
     }
 
@@ -92,13 +93,17 @@ public class Test_TrainerHomePage {
         Trainer_HomePage.navigate(driver,"prev");
     }
 
-//    //    @Test
-//    void prev_page(){
-//        Util.click(driver.findElement());
-//    }
-//
+    @Test (priority = 9)
+    void accept_skill() throws InterruptedException {
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
+        Trainer_HomePage.accept_skill(driver);
+    }
 
 
-
+    @Test (priority = 10)
+    void delete_skill() throws InterruptedException {
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
+        Trainer_HomePage.delete_skill_req(driver,username);
+    }
 
 }
