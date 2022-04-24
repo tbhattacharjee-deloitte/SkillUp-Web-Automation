@@ -27,7 +27,7 @@ public class Test_TrainerHomePage {
         Thread.sleep(3000);
     }
 
-    @Test
+    @Test (priority = 1)
     void become_trainer() throws InterruptedException {
         Trainer_HomePage.goto_trainer(driver);
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
@@ -37,26 +37,26 @@ public class Test_TrainerHomePage {
     }
 
 
-    @Test
+    @Test (priority = 2)
     void page_initiation_5() throws InterruptedException {
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
         Trainer_HomePage.initiation(driver,init_5,5);
     }
 
-    @Test
+    @Test (priority = 3)
     void page_initiation_10() throws InterruptedException {
 
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
         Trainer_HomePage.initiation(driver,init_10,10);
     }
 
-    @Test
+    @Test (priority = 4)
     void page_initiation_15() throws InterruptedException {
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
         Trainer_HomePage.initiation(driver,init_15,15);
     }
 
-    @Test
+    @Test (priority = 5)
     void search_filter_name(){
         String skill_name = "Vivek";
         Trainer_HomePage.search(driver,skill_name,"name");
@@ -64,23 +64,34 @@ public class Test_TrainerHomePage {
         driver.navigate().refresh();
     }
 
-    @Test
+    @Test (priority = 6)
     void search_filter_skill() throws InterruptedException {
 
         Util.zoomout(driver);
         String trainee_name = "HTML";
         Thread.sleep(3000);
         Trainer_HomePage.search(driver,trainee_name,"skill");
+
+        driver.navigate().refresh();
+        Util.zoomout(driver);
     }
 
 
-//
-//    //    @Test
-//    void next_page(){
-//        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
-//        Util.click(driver.findElement());
-//    }
-//
+    @Test (priority = 7)
+    void next_page() throws InterruptedException {
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
+        Thread.sleep(3000);
+        Trainer_HomePage.navigate(driver,"next");
+    }
+
+
+    @Test (priority = 8)
+    void prev_page() throws InterruptedException {
+        Thread.sleep(3000);
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
+        Trainer_HomePage.navigate(driver,"prev");
+    }
+
 //    //    @Test
 //    void prev_page(){
 //        Util.click(driver.findElement());

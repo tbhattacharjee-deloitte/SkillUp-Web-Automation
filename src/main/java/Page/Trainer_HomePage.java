@@ -18,11 +18,12 @@ public class Trainer_HomePage {
     static By become_trainer = By.xpath("//button[normalize-space()='BECOME A TRAINER']");
     static By initiation = By.xpath("//div[@class='mat-select-arrow ng-tns-c52-3']");
     static By pagination_range = By.xpath("//div[@class='mat-paginator-range-label']");
-    static By next_page_btn = By.xpath("/html/body/app-root/app-sidenav/div/div[2]/app-request-page/div/div/mat-paginator/div/div/div[2]/button[2]/span[1]/svg/path");
-    static By prev_page_btn = By.xpath("/html/body/app-root/app-sidenav/div/div[2]/app-request-page/div/div/mat-paginator/div/div/div[2]/button[1]/span[1]/svg/path");
+    static By next_page_btn = By.xpath("//button[@aria-label='Next page']");
+    static By prev_page_btn = By.xpath("//button[@aria-label='Previous page']");
     static By search_box = By.xpath("//input[@id='mat-input-0']");
     static By first_name = By.xpath("//tbody/tr[1]/td[1]");
     static By skill_name = By.xpath("//tbody/tr[1]/td[2]");
+
 
 
     public static void login(WebDriver driver, String username, String password){
@@ -95,5 +96,35 @@ public class Trainer_HomePage {
             }
         }
 
+    }
+
+    public static void navigate(WebDriver driver,String nav) throws InterruptedException {
+
+        String range = driver.findElement(pagination_range).getText();
+        int total = Integer.parseInt(range.substring(range.length()-2).strip());
+
+        if (total > 5) {
+            if (nav.equals("next")) {
+                Util.jsClick(driver, next_page_btn);
+                Thread.sleep(3000);
+                int num = Integer.parseInt((driver.findElement(pagination_range).getText()).substring(0, 1));
+                if (num == 6) {
+                    System.out.println("Successful");
+                } else {
+                    System.out.println("Unsuccessful");
+                }
+            }
+
+            if (nav.equals("prev")) {
+                Util.jsClick(driver, prev_page_btn);
+                Thread.sleep(3000);
+                int num = Integer.parseInt((driver.findElement(pagination_range).getText()).substring(0, 1));
+                if (num == 1) {
+                    System.out.println("Successful");
+                } else {
+                    System.out.println("Unsuccessful");
+                }
+            }
+        }
     }
 }
