@@ -10,7 +10,7 @@ import java.time.Duration;
 public class Login {
     static By loginXpath = By.xpath("//input[@placeholder='Enter your username']");
     static By passwordXpath = By.xpath("//input[@placeholder='Enter your password']");
-    static By loginBtn = By.xpath("//button[@class='lgbt']");
+    static By loginBtn = By.xpath("/html/body/app-root/app-login-page/div/form/div/div[3]");
     public static void login(WebDriver driver, String username, String password) {
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
         Util.sendKey(driver.findElement(loginXpath), username);
