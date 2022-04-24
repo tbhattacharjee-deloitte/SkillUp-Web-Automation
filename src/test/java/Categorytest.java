@@ -19,7 +19,7 @@ public class Categorytest {
     @BeforeTest
     void login() throws InterruptedException {
         driver = BaseClass.init();
-        Login.login(driver,"vivek", "vivek123");
+        Login.login(driver,BaseClass.prop.getProperty("username"), BaseClass.prop.getProperty("password"));
 
     }
     @Test(priority = 1)
