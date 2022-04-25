@@ -1,8 +1,10 @@
 import Base.BaseClass;
 import Helper.Util;
 import Page.Login;
+import Page.LoginScenario;
 import Page.ManagerEmployee;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeTest;
@@ -14,15 +16,18 @@ public class ProMangEmployee {
     WebDriver driver;
     String username = "sangeeta";
     String password = "sangeeta123";
+    By init_5 = By.xpath("//span[@class='mat-option-text'][normalize-space()='5']");
+    By init_10 = By.xpath("//span[normalize-space()='10']");
     By profileDivPath = By.xpath("//div[@class='profile']");
 
     @BeforeTest
     void login() {
         driver = BaseClass.init();
-        Login.login(driver, username,password);
+        LoginScenario.login(driver, username,password);
         Util.explicitWait_visibility(driver, 5000, profileDivPath);
         driver.navigate().refresh();
         Util.zoomout(driver);
+
     }
 
 
@@ -69,11 +74,33 @@ public class ProMangEmployee {
     }
 
     @Test (priority = 6)
-    void checkPagination(){
+    void next_page() throws InterruptedException {
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
-        ManagerEmployee.checkPageButton(driver);
+        Thread.sleep(3000);
+
+        ManagerEmployee.checkPageButton(driver,"next");
     }
 
+
+    @Test (priority = 7)
+    void prev_page() throws InterruptedException {
+        Thread.sleep(3000);
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
+        ManagerEmployee.checkPageButton(driver,"prev");
+    }
+
+    @Test (priority = 8)
+    void page_initiation_5() throws InterruptedException {
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
+        ManagerEmployee.page_init(driver,init_5,5);
+    }
+
+    @Test (priority = 9)
+    void page_initiation_10() throws InterruptedException {
+
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
+        ManagerEmployee.page_init(driver,init_10,10);
+    }
 
 
 

@@ -2,6 +2,7 @@ package Page;
 
 import Helper.Util;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
 import java.time.Duration;
@@ -13,8 +14,9 @@ public class ManagerEmployee {
     static By search_icon = By.xpath("//input[@id='mat-input-0']");
     static By action_btn = By.xpath("/html/body/app-root/app-sidenav/div/div[2]/app-employees/div/div/table/tbody/tr[1]/td[4]/a/mat-icon");
     static By close_btn =By.xpath("/html/body/div[2]/div[2]/div/mat-dialog-container/app-profile-view/div/div/button");
-    static By next_page_btn = By.xpath("//button[@aria-label='Next page']");
-    static By prev_page_btn = By.xpath("//button[@aria-label='Previous page']");
+    static By next_page_btn = By.xpath("/html/body/app-root/app-sidenav/div/div[2]/app-employees/div/div/mat-paginator/div/div/div[2]/button[2]");
+    static By pagination_range = By.xpath("//div[@class='mat-paginator-range-label']");
+    static By prev_page_btn = By.xpath("/html/body/app-root/app-sidenav/div/div[2]/app-employees/div/div/mat-paginator/div/div/div[2]/button[1]");
     static By items_perPage_btn =By.xpath("//*[@id='mat-select-0']");
     static By searched_name =By.xpath("/html/body/app-root/app-sidenav/div/div[2]/app-employees/div/div/table/tbody/tr/td[1]");
     static By searched_desigantion =By.xpath("/html/body/app-root/app-sidenav/div/div[2]/app-employees/div/div/table/tbody/tr[1]/td[2]");
@@ -24,7 +26,6 @@ public class ManagerEmployee {
     public static void goto_employee(WebDriver driver){
         Util.jsClick(driver,employee_btn);
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
-
 
     }
 
@@ -70,19 +71,81 @@ public class ManagerEmployee {
 
     }
 
-    //checking pagination functionality
-    public static void checkPageButton(WebDriver driver)
+    //checking pagination functionality for next and previous button
+    public static void checkPageButton(WebDriver driver,String nav) throws InterruptedException
     {
-        Util.jsClick(driver, next_page_btn);
-        Boolean accept_true = driver.findElement(next_page_btn).isEnabled();
-        System.out.println(accept_true + "Next page is enabled");
-        Util.jsClick(driver, prev_page_btn);
-        Boolean accept_true1 = driver.findElement(prev_page_btn).isEnabled();
-        System.out.println(accept_true1 + "Previous page is enabled");
-        Util.jsClick(driver, items_perPage_btn);
-        Boolean accept_true2 = driver.findElement(items_perPage_btn).isEnabled();
-        System.out.println(accept_true2 + "Items per page is enabled");
+        //zoom-out to fit the data in the screen
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("document.body.style.zoom='50%'");
+
+        String range = driver.findElement(pagination_range).getText();
+        int total = Integer.parseInt(range.substring(range.length()-2).strip());
+
+        if (total > 5) {
+            //Next Page button
+            if (nav.equals("next")) {
+                Util.jsClick(driver, next_page_btn);
+                driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
+
+                Thread.sleep(3000);
+                int num = Integer.parseInt((driver.findElement(pagination_range).getText()).substring(0, 1));
+                if (num == 6) {
+                    System.out.println("Successful");
+                } else {
+                    System.out.println("Unsuccessful");
+                }
+            }
 
 
+            // Previous Page button
+            if (nav.equals("prev")) {
+                Util.jsClick(driver, prev_page_btn);
+                driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
+
+                Thread.sleep(3000);
+                int num = Integer.parseInt((driver.findElement(pagination_range).getText()).substring(0, 1));
+                if (num == 1) {
+                    System.out.println("Successful");
+                } else {
+                    System.out.println("Unsuccessful");
+                }
+            }
+        }
     }
+
+    //checking pagination for items per page
+    public static void page_init(WebDriver driver,By drop_down_number,int number) throws InterruptedException {
+        //zoom-out to fit the data in the screen
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("document.body.style.zoom='40%'");
+
+        // dropdown button
+        Util.jsClick(driver,items_perPage_btn);
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
+
+
+        //selecting the number from dropdown
+        Util.jsClick(driver,drop_down_number);
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
+
+        Thread.sleep(3000);
+
+
+        //validating the number of data being displaying
+        String range = driver.findElement(pagination_range).getText();
+        int total = Integer.parseInt(range.substring(range.length()-2).strip());
+
+        if(total > number){
+            int display_num = Integer.parseInt(range.substring(4,6).strip());
+
+            if(display_num == number){
+                System.out.println("Pass");
+            }
+            else {
+                System.out.println("Fail");
+            }
+        }
+    }
+
+
 }

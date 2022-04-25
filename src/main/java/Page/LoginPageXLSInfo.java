@@ -13,6 +13,8 @@ import java.io.IOException;
 
 public class LoginPageXLSInfo {
 
+    //Excel rows and coloums defined for login scenario
+
     public FileInputStream fi;
     public FileOutputStream fo;
     public XSSFWorkbook workbook;
@@ -67,6 +69,7 @@ public class LoginPageXLSInfo {
         fi.close();
         return data;
     }
+
 
 
 
