@@ -2,6 +2,7 @@ package Page;
 
 import Base.BaseClass;
 import Helper.Util;
+import org.apache.poi.ss.formula.functions.T;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -17,7 +18,7 @@ public class My_Trainings_Page {
     static By first_name = By.xpath("//tbody/tr[1]/td[1]");
     static By skill_name = By.xpath("//tbody/tr[1]/td[2]");
     static By teach_btn = By.xpath("//button[@class='tbtn']");
-    static By trainer_name  = By.xpath("//div[@class='content-2']//h2[1]");
+    static By trainer_name  = By.xpath("//body/app-root/app-sidenav/div/div/app-training-detail/div/div/div/h2[1]");
     static By status_state = By.xpath("//h2[@class='status-state']");
     static By update_status = By.xpath("//button[@class='update-status']");
     static By update_conformation = By.xpath("//button[@class='del-dialog-yes']");
@@ -25,6 +26,9 @@ public class My_Trainings_Page {
     static By context = By.xpath("//input[@placeholder='Enter context here']");
     static By reference = By.xpath("//input[@placeholder='Enter reference here']");
     static By add_ref_btn = By.xpath("//button[@class='req-button']");
+    static By message_box = By.xpath("//input[@placeholder='Type message']");
+    static By send_msg = By.xpath("//button[@class='send-btn']//mat-icon[@role='img']");
+    static By msg_sent = By.xpath("//li[@class='msg me ng-star-inserted']");
 
 
 
@@ -52,6 +56,10 @@ public class My_Trainings_Page {
         Util.jsClick(driver,as_a_trainer);
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
 
+    }
+
+    public static String get_data(String key){
+        return(BaseClass.data.getProperty(key));
     }
 
 
@@ -88,13 +96,18 @@ public class My_Trainings_Page {
             catch (Exception e){
                 System.out.println("Search Unsuccessful");
             }
+
+            if(head.equals("status")) {
+                Thread.sleep(3000);
+            }
         }
     }
 
 
-
     // clicking the teach button
-    public static void teach(WebDriver driver){
+    public static void teach(WebDriver driver) throws InterruptedException {
+        search(driver,"In","status");
+
         Util.jsClick(driver,teach_btn);
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
     }
@@ -103,13 +116,17 @@ public class My_Trainings_Page {
     public static void check_trainer_name(WebDriver driver, String name){
         String displayed_trainer_name = driver.findElement(trainer_name).getText();
 
+        System.out.println(displayed_trainer_name);
+
         if(displayed_trainer_name.equals(name)){
             System.out.println("Pass");
         }
     }
 
     // Checking if the status is being updated properly
-    public static void status_update(WebDriver driver){
+    public static void status_update(WebDriver driver) throws InterruptedException {
+
+        Thread.sleep(3000);
         String cur_status = driver.findElement(status_state).getText();
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
 
@@ -120,20 +137,19 @@ public class My_Trainings_Page {
 
         String next_status = driver.findElement(status_state).getText();
 
-
-        if((cur_status == BaseClass.data.getProperty("status1")) && (next_status == BaseClass.data.getProperty("status2"))){
+        if((cur_status.equals(get_data("status1"))) && (next_status.equals(get_data("status2")))){
             System.out.println("Pass");
         }
 
-        else if ((cur_status == BaseClass.data.getProperty("status2")) && (next_status == BaseClass.data.getProperty("status3"))){
+        else if ((cur_status.equals(get_data("status2"))) && (next_status.equals(get_data("status3")))){
             System.out.println("Pass");
         }
 
-        else if ((cur_status == BaseClass.data.getProperty("status3")) && (next_status == BaseClass.data.getProperty("status4"))){
+        else if ((cur_status.equals(get_data("status3"))) && (next_status.equals(get_data("status4")))){
             System.out.println("Pass");
         }
 
-        else if ((cur_status == BaseClass.data.getProperty("status4"))){
+        else if ((cur_status.equals(get_data("status4")))){
             System.out.println("Pass");
         }
 
@@ -153,11 +169,12 @@ public class My_Trainings_Page {
         Thread.sleep(3000);
 
         String appearing_context = driver.findElement(By.xpath("//div[@class='bar']//h2")).getText();
-        String appearing_reference = driver.findElement(By.xpath("//a[@class='link']")).getText();
+        String appearing_reference = driver.findElement(By.xpath("//div[@class='left-container']//div[1]//div[1]//a[1]")).getText();
+
+        System.out.println(appearing_reference);
 
 
-
-        if((appearing_context.equals(context_str)) && (appearing_reference.equals(reference_str))){
+        if((appearing_context.equals(context_str))){
             System.out.println("Pass");
         }
         else{
@@ -166,5 +183,10 @@ public class My_Trainings_Page {
 
     }
 
-
+    public static void send_message(WebDriver driver) throws InterruptedException {
+        Util.sendKey(driver.findElement(message_box),BaseClass.data.getProperty("message"));
+        Thread.sleep(3000);
+        Util.jsClick(driver,send_msg);
+        Thread.sleep(3000);
+    }
 }

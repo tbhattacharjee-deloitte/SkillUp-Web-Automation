@@ -12,7 +12,7 @@ public class BaseClass {
     static {
         try{
             data = new Properties();
-            FileInputStream ip=new FileInputStream(System.getProperty("user.dir") + "\\src\\main\\java\\config\\config.properties");
+            FileInputStream ip=new FileInputStream(System.getProperty("user.dir") + "\\src\\main\\java\\config\\data.properties");
             data.load(ip);
         } catch (Exception e) {
             e.printStackTrace();

@@ -11,7 +11,7 @@ public class My_Trainings_Test {
     WebDriver driver;
     String username = BaseClass.prop.getProperty("user_username");
     String password = BaseClass.prop.getProperty("user_password");
-    String name = BaseClass.prop.getProperty("user_name");;
+    String usr_name = BaseClass.prop.getProperty("user_name");
 
 
     @BeforeTest
@@ -32,7 +32,7 @@ public class My_Trainings_Test {
 
     @Test (priority = 2)
     void search_filter_name() throws InterruptedException {
-        String skill_name = BaseClass.data.getProperty("name");
+        String skill_name = My_Trainings_Page.get_data("name");
 
         My_Trainings_Page.search(driver,skill_name,"name");
 
@@ -42,7 +42,7 @@ public class My_Trainings_Test {
     @Test (priority = 3)
     void search_filter_skill() throws InterruptedException {
         Util.zoomout(driver);
-        String trainee_name = BaseClass.data.getProperty("skill");
+        String trainee_name = My_Trainings_Page.get_data("skill");
         Thread.sleep(3000);
         My_Trainings_Page.search(driver,trainee_name,"skill");
 
@@ -51,23 +51,30 @@ public class My_Trainings_Test {
     }
 
     @Test (priority = 4)
-    void teach_btn(){
+    void teach_btn() throws InterruptedException {
         My_Trainings_Page.teach(driver);
     }
 
     @Test (priority = 5)
     void check_cred(){
-        My_Trainings_Page.check_trainer_name(driver,name);
+        My_Trainings_Page.check_trainer_name(driver,usr_name);
     }
 
     @Test (priority = 6)
-    void status_updating(){
+    void status_updating() throws InterruptedException {
         My_Trainings_Page.status_update(driver);
     }
 
     @Test (priority = 7)
     void adding_reference() throws InterruptedException {
-        My_Trainings_Page.add_reference(driver,BaseClass.data.getProperty("context"),BaseClass.data.getProperty("reference"));
+
+        System.out.println(My_Trainings_Page.get_data("context")+" "+My_Trainings_Page.get_data("reference"));
+        My_Trainings_Page.add_reference(driver,My_Trainings_Page.get_data("context"),My_Trainings_Page.get_data("reference"));
+    }
+
+    @Test (priority = 8)
+    void send_message_trainer() throws InterruptedException {
+        My_Trainings_Page.send_message(driver);
     }
 
 }
