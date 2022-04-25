@@ -36,7 +36,8 @@ public class MyTrainingsTrainee {
     }
 
     public static void ChatBox(WebDriver driver, String Message){
-        ((JavascriptExecutor)driver).executeScript("arguments[0].value='"+ Message +"';", driver.findElement(MessageBox));;
+//        ((JavascriptExecutor)driver).executeScript("arguments[0].value='"+ Message +"';", driver.findElement(MessageBox));
+        ((JavascriptExecutor)driver).executeScript("document.getElementsByTagName('input')[0].value='"+Message+"';");
     }
     public static void Send(WebDriver driver){
         ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(SendButton));

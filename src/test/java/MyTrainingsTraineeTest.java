@@ -33,7 +33,7 @@ public class MyTrainingsTraineeTest {
         MyTrainingsTrainee.AllTrainings(driver);
     }
 
-    @Test(priority = 2) // need to add assertions
+    @Test(priority = 2)
     void SearchBySkills() throws Exception{
         driver.navigate().refresh();
         Thread.sleep(4000);

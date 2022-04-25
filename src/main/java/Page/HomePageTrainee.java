@@ -37,22 +37,26 @@ public class HomePageTrainee {
     }
 
     public static void EnterStartDate(WebDriver driver, String date){
-        driver.findElement(StartDate).sendKeys(date);
+//        driver.findElement(StartDate).sendKeys(date);
+        ((JavascriptExecutor)driver).executeScript("document.getElementsByTagName('input')[0].value='"+date+"';");
 //        ((JavascriptExecutor)driver).executeScript("arguments[0].value = '05/15/2022';", driver.findElement(StartDate));
     }
 
     public static void EnterStartTime(WebDriver driver, String sTime){
-        driver.findElement(StartTime).sendKeys(sTime);
+//        driver.findElement(StartTime).sendKeys(sTime);
+        ((JavascriptExecutor)driver).executeScript("document.getElementsByTagName('input')[1].value='"+sTime+"';");
 //        ((JavascriptExecutor)driver).executeScript("arguments[0].value = '"+sTime+"';", driver.findElement(StartTime));
     }
 
     public static void EnterEndTime(WebDriver driver, String eTime){
-        driver.findElement(EndTime).sendKeys(eTime);
+//        driver.findElement(EndTime).sendKeys(eTime);
+        ((JavascriptExecutor)driver).executeScript("document.getElementsByTagName('input')[2].value='"+eTime+"';");
 //        ((JavascriptExecutor)driver).executeScript("arguments[0].value = '"+eTime+"';", driver.findElement(EndTime));
     }
 
     public static void EnterDuration(WebDriver driver, String duration){
-        ((JavascriptExecutor)driver).executeScript("arguments[0].value = '"+duration+"';", driver.findElement(Duration));
+//        ((JavascriptExecutor)driver).executeScript("arguments[0].value = '"+duration+"';", driver.findElement(Duration));
+        ((JavascriptExecutor)driver).executeScript("document.getElementsByTagName('input')[3].value='"+duration+"';");
     }
 
     public static void ClickCreateButton(WebDriver driver){

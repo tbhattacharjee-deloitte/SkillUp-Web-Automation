@@ -46,20 +46,20 @@ public class HomePageTraineeTest {
     @Test(priority = 3)
     void StartDateTest() throws Exception{
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(5000));
-        HomePageTrainee.EnterStartDate(driver, "05152022");
+        HomePageTrainee.EnterStartDate(driver, "2022-05-15");
         Thread.sleep(3000);
     }
 
     @Test(priority = 4)
     void StartTimeTest(){
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(5000));
-        HomePageTrainee.EnterStartTime(driver, "03:00:00 PM");
+        HomePageTrainee.EnterStartTime(driver, "15:00:00");
     }
 
     @Test(priority = 5)
     void EndTimeTest(){
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(5000));
-        HomePageTrainee.EnterEndTime(driver, "05:00:00 PM");
+        HomePageTrainee.EnterEndTime(driver, "17:00:00");
     }
 
     @Test(priority = 6)
@@ -84,8 +84,8 @@ public class HomePageTraineeTest {
         HomePageTrainee.SearchUser(driver, "Python");
         driver.findElement(By.xpath("//tr[2]//td[2]")).getText();
     }
-    @AfterTest
-    void CloseBrowser(){
-        driver.close();
-    }
+//    @AfterTest
+//    void CloseBrowser(){
+//        driver.close();
+//    }
 }
