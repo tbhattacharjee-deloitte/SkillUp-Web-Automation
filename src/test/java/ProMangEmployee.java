@@ -59,7 +59,6 @@ public class ProMangEmployee {
     void searchBy_exp(){
         String exper= "3";
         ManagerEmployee.searchBy(driver,exper,"Experience");
-
         driver.navigate().refresh();
 
     }

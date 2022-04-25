@@ -6,8 +6,6 @@ import org.openqa.selenium.WebDriver;
 
 import java.time.Duration;
 
-import static Page.Login.loginXpath;
-import static Page.Login.passwordXpath;
 
 public class ManagerEmployee {
 
