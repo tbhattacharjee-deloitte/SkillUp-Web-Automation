@@ -33,7 +33,7 @@ public class TestLogin {
     public void loginTest(String user, String pwd, String exp) {
 
         //Login using credentials from excel
-        LoginScenario.login(driver, user, pwd);
+        Login.login(driver, user, pwd);
 
         if (exp.equals("Valid")) {
             String exp_title = "Home";

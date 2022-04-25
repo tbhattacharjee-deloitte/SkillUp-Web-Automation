@@ -25,7 +25,7 @@ public class ProMangEmployee {
     @BeforeTest
     void login() throws IOException {
         driver = BaseClass.init();
-        LoginScenario.data_manager(driver);
+        ManagerEmployee.data_manager(driver);
         Util.explicitWait_visibility(driver, 5000, profileDivPath);
         driver.navigate().refresh();
         Util.zoomout(driver);
