@@ -24,7 +24,5 @@ public class Login extends BaseClass{
         Util.sendKey(driver.findElement(passwordXpath), password);
         Util.click(driver.findElement(loginBtn));
 
-
-
     }
 }

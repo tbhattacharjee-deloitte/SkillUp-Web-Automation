@@ -1,4 +1,5 @@
 import Base.BaseClass;
+import Helper.Util;
 import Page.Login;
 import Page.ManagerEmployee;
 import org.openqa.selenium.By;
@@ -13,13 +14,17 @@ public class ProMangEmployee {
     WebDriver driver;
     String username = "sangeeta";
     String password = "sangeeta123";
+    By profileDivPath = By.xpath("//div[@class='profile']");
 
-    @Test
+    @BeforeTest
     void login() {
         driver = BaseClass.init();
-        ManagerEmployee.login(driver,username,password);
-
+        Login.login(driver, username,password);
+        Util.explicitWait_visibility(driver, 5000, profileDivPath);
+        driver.navigate().refresh();
+        Util.zoomout(driver);
     }
+
 
 
     @Test(priority=1)

@@ -94,28 +94,7 @@ public class TestLogin {
 
 }
 /*
-        Util.zoomout(driver);
-        driver.navigate().refresh();
 
-        driver.findElement(By.xpath("//a[@href ='/employees']")).click();
-        WebElement searchbox = driver.findElement(By.xpath("//input[@id='mat-input-0'']"));
-        searchbox.sendKeys("Vivek");
-        searchbox.clear();
-        searchbox.sendKeys("sdet");
-        searchbox.clear();
-        searchbox.sendKeys("3");
-        driver.findElement(By.xpath("/html/body/app-root/app-sidenav/div/div[2]/app-employees/div/div/table/tbody/tr[1]/td[4]/a/mat-icon")).click();
-        driver.findElement(By.xpath("//*[@id='mat-dialog-1']/app-profile-view/div/div/button")).click();
-        WebElement nextPage = driver.findElement(By.xpath("/html/body/app-root/app-sidenav/div/div[2]/app-employees/div/div/mat-paginator/div/div/div[2]/button[2]"));
-        nextPage.isEnabled();
-        System.out.println("Next page is enabled");
-        WebElement PreviousPage = driver.findElement(By.xpath("/html/body/app-root/app-sidenav/div/div[2]/app-employees/div/div/mat-paginator/div/div/div[2]/button[1]"));
-        PreviousPage.isEnabled();
-        System.out.println("Previous page is enabled");
-
-        WebElement ItemsPerPage = driver.findElement(By.xpath("//*[@id='mat-select-0']"));
-        ItemsPerPage.isEnabled();
-        System.out.println("Items per page is enabled");
 
         /*String exp_title ="Home";
         String act_title = driver.findElement(By.xpath("/html/body/app-root/app-sidenav/div/div[2]/app-landing-page/p")).getText();
