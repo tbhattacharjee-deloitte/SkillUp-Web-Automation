@@ -1,8 +1,13 @@
 package Page;
 
 import Helper.Util;
+import org.apache.http.util.Asserts;
+import org.apache.logging.log4j.core.util.Assert;
+import org.bson.assertions.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+
+
 
 import java.time.Duration;
 
@@ -58,6 +63,7 @@ public class As_A_Trainer_Page {
             try {
                 String appearing_name = driver.findElement(skill_name).getText();
                 System.out.println(appearing_name);
+
                 if (appearing_name.equals(search_name)) {
                     System.out.println("Search Successful");
                 } else {
@@ -105,11 +111,11 @@ public class As_A_Trainer_Page {
             System.out.println("Pass");
         }
 
-        else if ((cur_status == "assignment") && (next_status == "evluating")){
+        else if ((cur_status == "assignment") && (next_status == "evaluating")){
             System.out.println("Pass");
         }
 
-        else if ((cur_status == "evluating") && (next_status == "completed")){
+        else if ((cur_status == "evaluating") && (next_status == "completed")){
             System.out.println("Pass");
         }
 

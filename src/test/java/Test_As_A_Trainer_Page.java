@@ -14,9 +14,9 @@ import java.time.Duration;
 
 public class Test_As_A_Trainer_Page {
     WebDriver driver;
-    String username = "vivek";
-    String password = "vivek123";
-    String name = "vivek";
+    String username = BaseClass.prop.getProperty("user_username");
+    String password = BaseClass.prop.getProperty("user_password");
+    String name = "user_name";
 
 
     @BeforeTest
