@@ -1,6 +1,7 @@
 package TestClasses;
 
 import Base.BaseClass;
+import Helper.ExtractData;
 import Helper.Util;
 import ListenersPackage.AdminManagerListener;
 import Page.Login;
@@ -16,10 +17,12 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Listeners(AdminManagerListener.class)
@@ -50,7 +53,8 @@ public class AdminManagerTest {
         // initialize driver
         driver = BaseClass.init();
         // login
-        Login.login(driver,"mentorAdmin", "abc123");
+        ArrayList<String> admin = ExtractData.getAdminDetails();
+        Login.login(driver,admin.get(0), admin.get(1));
         // refresh
         Util.explicitWait_visibility(driver, 5000, profileDivPath);
         driver.navigate().refresh();
@@ -123,5 +127,11 @@ public class AdminManagerTest {
     @Test (priority = 11)
     public void delLastSkill() {
         skillsPage.delLastSkill();
+    }
+
+    @AfterTest
+    public void closeDriver() {
+        Util.implicitWait(driver, 3000);
+        driver.close();
     }
 }

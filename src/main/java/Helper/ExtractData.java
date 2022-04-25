@@ -5,6 +5,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.FileInputStream;
+import java.util.ArrayList;
 
 public class ExtractData {
     public static User getSingleUser() {
@@ -26,7 +27,22 @@ public class ExtractData {
         return user;
     }
 
+    public static ArrayList<String> getAdminDetails() {
+        ArrayList<String> admin = new ArrayList<>();
+        try {
+            XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream(System.getProperty("user.dir") + "\\src\\main\\resources\\Data.xlsx"));
+            XSSFSheet sheet = workbook.getSheetAt(1);
+            XSSFRow row = sheet.getRow(1);
+            admin.add(row.getCell(0).toString());
+            admin.add(row.getCell(1).toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return admin;
+    }
+
 //    public static void main(String[] args) {
 //        getSingleUser();
+//        System.out.println(getAdminDetails());
 //    }
 }
