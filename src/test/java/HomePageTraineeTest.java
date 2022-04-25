@@ -2,6 +2,7 @@ import Base.BaseClass;
 import Page.HomePageTrainee;
 import Page.Login;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterTest;
@@ -46,26 +47,42 @@ public class HomePageTraineeTest {
     @Test(priority = 3)
     void StartDateTest() throws Exception{
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(5000));
-        HomePageTrainee.EnterStartDate(driver, "2022-05-15");
-        Thread.sleep(3000);
+        String date = "2022-05-15";
+        HomePageTrainee.EnterStartDate(driver, date);
+        String val = ((JavascriptExecutor)driver).executeScript("return document.getElementsByTagName('input')[0].value").toString();
+        System.out.println(val);
+        assert date.equals(val);
+//        Thread.sleep(3000);
     }
 
     @Test(priority = 4)
     void StartTimeTest(){
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(5000));
-        HomePageTrainee.EnterStartTime(driver, "15:00:00");
+        String time = "15:00:00";
+        HomePageTrainee.EnterStartTime(driver, time);
+        String val = ((JavascriptExecutor)driver).executeScript("return document.getElementsByTagName('input')[1].value").toString();
+        System.out.println(val);
+        assert time.equals(val);
     }
 
     @Test(priority = 5)
     void EndTimeTest(){
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(5000));
-        HomePageTrainee.EnterEndTime(driver, "17:00:00");
+        String time = "17:00:00";
+        HomePageTrainee.EnterEndTime(driver, time);
+        String val = ((JavascriptExecutor)driver).executeScript("return document.getElementsByTagName('input')[2].value").toString();
+        System.out.println(val);
+        assert time.equals(val);
     }
 
     @Test(priority = 6)
     void DurationTest(){
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(5000));
-        HomePageTrainee.EnterDuration(driver, "2");
+        String duration = "2";
+        HomePageTrainee.EnterDuration(driver, duration);
+        String val = ((JavascriptExecutor)driver).executeScript("return document.getElementsByTagName('input')[3].value").toString();
+        System.out.println(val);
+        assert duration.equals(val);
     }
 
     @Test(priority = 7)

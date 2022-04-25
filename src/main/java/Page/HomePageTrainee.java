@@ -14,7 +14,7 @@ public class HomePageTrainee {
     private static By StartTime = By.xpath("(//input)[2]");
     private static By EndTime = By.xpath("(//input)[3]");
     private static By Duration = By.xpath("(//input)[4]");
-    private static By CreateButton = By.xpath("//*[text()='CREATE']");
+    private static By CreateButton = By.xpath("//button[text()='CREATE']");
     private static By SearchBox = By.xpath("(//input)[1]");
     private static By Info = By.xpath("//*[text()='info']");
     private static By CloseButton = By.xpath("//button[text()='close']");
