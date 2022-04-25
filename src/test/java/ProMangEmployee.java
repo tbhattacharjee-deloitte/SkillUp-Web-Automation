@@ -1,8 +1,6 @@
 import Base.BaseClass;
 import Helper.Util;
-import Page.Login;
-import Page.LoginScenario;
-import Page.ManagerEmployee;
+import Page.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -10,27 +8,29 @@ import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
 import java.time.Duration;
+
+import static Base.BaseClass.prop;
 
 public class ProMangEmployee {
     WebDriver driver;
-    String username = "sangeeta";
-    String password = "sangeeta123";
     By init_5 = By.xpath("//span[@class='mat-option-text'][normalize-space()='5']");
     By init_10 = By.xpath("//span[normalize-space()='10']");
     By profileDivPath = By.xpath("//div[@class='profile']");
 
+    public ProMangEmployee() throws IOException {
+    }
+
     @BeforeTest
-    void login() {
+    void login() throws IOException {
         driver = BaseClass.init();
-        LoginScenario.login(driver, username,password);
+        LoginScenario.data_manager(driver);
         Util.explicitWait_visibility(driver, 5000, profileDivPath);
         driver.navigate().refresh();
         Util.zoomout(driver);
 
     }
-
-
 
     @Test(priority=1)
     void goto_employee(){
@@ -43,7 +43,7 @@ public class ProMangEmployee {
 
    @Test (priority = 2)
     void searchBy_name(){
-        String name = "Vivek";
+        String name = prop.getProperty("name");
         ManagerEmployee.searchBy(driver,name,"Name");
 
        driver.navigate().refresh();
@@ -52,7 +52,7 @@ public class ProMangEmployee {
 
     @Test (priority = 3)
     void searchBy_Designation(){
-        String designation = "sdet";
+        String designation = prop.getProperty("designation");
         ManagerEmployee.searchBy(driver,designation,"Designation");
 
         driver.navigate().refresh();
@@ -62,7 +62,7 @@ public class ProMangEmployee {
 
     @Test (priority = 4)
     void searchBy_exp(){
-        String exper= "3";
+        String exper= prop.getProperty("experience");
         ManagerEmployee.searchBy(driver,exper,"Experience");
         driver.navigate().refresh();
 
