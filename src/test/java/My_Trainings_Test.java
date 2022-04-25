@@ -1,11 +1,15 @@
 import Base.BaseClass;
 import Helper.Util;
 import Page.My_Trainings_Page;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
+import java.util.List;
 
 public class My_Trainings_Test {
     WebDriver driver;
@@ -75,6 +79,89 @@ public class My_Trainings_Test {
     @Test (priority = 8)
     void send_message_trainer() throws InterruptedException {
         My_Trainings_Page.send_message(driver);
+        Thread.sleep(3000);
+        My_Trainings_Page.goto_as_a_trainer(driver);
+        Thread.sleep(3000);
+    }
+
+    @Test (priority = 9)
+    void MyTrainingsPage() {
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        My_Trainings_Page.MyTrainingPage(driver);
+        String ActualURL = driver.getCurrentUrl();
+        String ExpectedURL = "https://hu-monitorapp-front-urtjok3rza-wl.a.run.app/my-trainings?trainingAs=trainee";
+        assert ActualURL.equals(ExpectedURL);
+    }
+
+    @Test(priority = 10)
+    void ClickAsATrainee() {
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        My_Trainings_Page.AllTrainings(driver);
+    }
+
+    @Test(priority = 11)
+    void SearchBySkills() throws Exception{
+        driver.navigate().refresh();
+        Thread.sleep(4000);
+        driver.navigate().refresh();
+        String key = "Python";
+        My_Trainings_Page.SearchBySkills(driver, key);
+        String skill = driver.findElement(By.xpath("//tr[1]//td[2]")).getText();
+        assert key.equals(skill);
+    }
+
+
+    @Test(priority = 12)
+    void CheckStatus() throws Exception{
+        driver.navigate().refresh();
+        Thread.sleep(3000);
+        String status = ((JavascriptExecutor)driver).executeScript("return document.getElementsByTagName('td')[2].innerText").toString();
+        System.out.println(status);
+    }
+
+
+    @Test(priority = 13)
+    void ClickLearn() throws Exception{
+        driver.navigate().refresh();
+        Thread.sleep(3000);
+        driver.navigate().refresh();
+        My_Trainings_Page.Learn(driver);
+        Thread.sleep(5000);
+        String ActualURL = driver.getCurrentUrl();
+        String SubString = ActualURL.substring(0,72);
+        String ExpectedSubString = "https://hu-monitorapp-front-urtjok3rza-wl.a.run.app/training?trainingId=";
+        assert SubString.equals(ExpectedSubString);
+    }
+
+
+    @Test(priority = 14)
+    void MessageBox(){
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        String message = "some message";
+        My_Trainings_Page.ChatBox(driver, message);
+        String val = ((JavascriptExecutor)driver).executeScript("return document.getElementsByTagName('input')[0].value").toString();
+        assert val.equals(message);
+    }
+
+
+    @Test(priority = 15)
+    void Send() {
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        My_Trainings_Page.Send(driver);
+    }
+
+
+    @Test(priority = 16)
+    void CheckMessage(){
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        List<WebElement> Received = driver.findElements(By.xpath("//li[@class='msg him ng-star-inserted']"));
+        List<WebElement> Sent = driver.findElements(By.xpath("//li[@class='msg me ng-star-inserted']"));
+        for(int i = 0; i < Received.size(); i++){
+            System.out.println(Received.get(i).getText());
+        }
+        for(int j = 0; j < Sent.size(); j++){
+            System.out.println(Sent.get(j).getText());
+        }
     }
 
 }

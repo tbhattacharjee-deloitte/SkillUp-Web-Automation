@@ -2,9 +2,13 @@ package Page;
 
 import Base.BaseClass;
 import Helper.Util;
+import net.jodah.failsafe.internal.util.Assert;
 import org.apache.poi.ss.formula.functions.T;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
@@ -29,6 +33,13 @@ public class My_Trainings_Page {
     static By message_box = By.xpath("//input[@placeholder='Type message']");
     static By send_msg = By.xpath("//button[@class='send-btn']//mat-icon[@role='img']");
     static By msg_sent = By.xpath("//li[@class='msg me ng-star-inserted']");
+    static By MyTrainings = By.xpath("//a[normalize-space()='My Trainings']");
+    static By TraineeButton = By.xpath("//*[text()='As a Trainee']");
+    static By SearchBox = By.xpath("//input[@id='mat-input-0']");
+    static By LearnButton = By.xpath("(//button[text()='Learn'])[1]");
+    static By MessageBox = By.xpath("//input[@placeholder='Type message']");
+    static By SendButton = By.xpath("//mat-icon[text()='send']");
+    static By HomePage = By.xpath("//*[text()='Home']");
 
 
 
@@ -44,7 +55,6 @@ public class My_Trainings_Page {
         Util.zoomout(driver);
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
     }
-
 
 
     //Navigate to My training - As a trainer page
@@ -72,11 +82,8 @@ public class My_Trainings_Page {
         if(head.equals("name")) {
             String appearing_name = driver.findElement(first_name).getText();
             System.out.println(appearing_name);
-            if (appearing_name.equals(search_name)) {
-                System.out.println("Search Successful");
-            } else {
-                System.out.println("Search Unsuccessful");
-            }
+            assert appearing_name.equals(search_name);
+
         }
 
         if(head.equals("skill")){
@@ -84,13 +91,7 @@ public class My_Trainings_Page {
             // Try block to ignore test if no skill is being trained
             try {
                 String appearing_name = driver.findElement(skill_name).getText();
-                System.out.println(appearing_name);
-
-                if (appearing_name.equals(search_name)) {
-                    System.out.println("Search Successful");
-                } else {
-                    System.out.println("Search Unsuccessful");
-                }
+                assert appearing_name.equals(search_name);
             }
 
             catch (Exception e){
@@ -112,16 +113,15 @@ public class My_Trainings_Page {
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
     }
 
+
     // verifying if the trainer name is correct
     public static void check_trainer_name(WebDriver driver, String name){
         String displayed_trainer_name = driver.findElement(trainer_name).getText();
 
-        System.out.println(displayed_trainer_name);
+        assert displayed_trainer_name.equals(name);
 
-        if(displayed_trainer_name.equals(name)){
-            System.out.println("Pass");
-        }
     }
+
 
     // Checking if the status is being updated properly
     public static void status_update(WebDriver driver) throws InterruptedException {
@@ -137,24 +137,21 @@ public class My_Trainings_Page {
 
         String next_status = driver.findElement(status_state).getText();
 
-        if((cur_status.equals(get_data("status1"))) && (next_status.equals(get_data("status2")))){
-            System.out.println("Pass");
+
+        if(cur_status.equals(get_data("status1"))){
+            assert next_status.equals(get_data("status2"));
         }
 
-        else if ((cur_status.equals(get_data("status2"))) && (next_status.equals(get_data("status3")))){
-            System.out.println("Pass");
+        else if (cur_status.equals(get_data("status2"))){
+            assert next_status.equals(get_data("status3"));
         }
 
-        else if ((cur_status.equals(get_data("status3"))) && (next_status.equals(get_data("status4")))){
-            System.out.println("Pass");
-        }
-
-        else if ((cur_status.equals(get_data("status4")))){
-            System.out.println("Pass");
+        else if (cur_status.equals(get_data("status3"))){
+            assert next_status.equals(get_data("status4"));
         }
 
         else{
-            System.out.println("Fail");
+            assert cur_status.equals(get_data("status4"));
         }
     }
 
@@ -173,15 +170,10 @@ public class My_Trainings_Page {
 
         System.out.println(appearing_reference);
 
-
-        if((appearing_context.equals(context_str))){
-            System.out.println("Pass");
-        }
-        else{
-            System.out.println("Fail");
-        }
+        assert appearing_context.equals(context_str);
 
     }
+
 
     public static void send_message(WebDriver driver) throws InterruptedException {
         Util.sendKey(driver.findElement(message_box),BaseClass.data.getProperty("message"));
@@ -189,4 +181,46 @@ public class My_Trainings_Page {
         Util.jsClick(driver,send_msg);
         Thread.sleep(3000);
     }
+
+
+    public static void MyTrainingPage(WebDriver driver){
+        driver.findElement(MyTrainings).click();
+    }
+
+
+    public static void AllTrainings(WebDriver driver){
+        driver.findElement(TraineeButton).click();
+    }
+
+
+    public static void SearchBySkills(WebDriver driver, String SearchData){
+        driver.findElement(SearchBox).sendKeys(SearchData);
+    }
+
+
+    public static void Learn(WebDriver driver){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(LearnButton));
+        driver.findElement(LearnButton).click();
+    }
+
+
+    public static void ChatBox(WebDriver driver, String Message){
+//        ((JavascriptExecutor)driver).executeScript("arguments[0].value='"+ Message +"';", driver.findElement(MessageBox));
+        ((JavascriptExecutor)driver).executeScript("document.getElementsByTagName('input')[0].value='"+Message+"';");
+    }
+
+
+    public static void Send(WebDriver driver){
+        ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(SendButton));
+    }
+
+
+    public static void Home(WebDriver driver){
+        driver.findElement(HomePage).click();
+    }
 }
+
+
+
+
