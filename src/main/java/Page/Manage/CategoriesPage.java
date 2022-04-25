@@ -26,12 +26,10 @@ public class CategoriesPage {
     private final String inpGenPath = "//input[@placeholder='%s']";
 
     private WebDriver driver;
-    private ExtentTest test;
     private Logger logger;
 
-    public CategoriesPage(WebDriver driver, ExtentTest test, Logger logger) {
+    public CategoriesPage(WebDriver driver, Logger logger) {
         this.driver = driver;
-        this.test = test;
         this.logger = logger;
     }
 

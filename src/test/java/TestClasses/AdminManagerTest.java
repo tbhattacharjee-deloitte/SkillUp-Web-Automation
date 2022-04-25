@@ -5,6 +5,7 @@ import Helper.Util;
 import ListenersPackage.AdminManagerListener;
 import Page.Login;
 import Page.Manage.CategoriesPage;
+import Page.Manage.SkillsPage;
 import Page.Manage.UsersPage;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
@@ -36,6 +37,7 @@ public class AdminManagerTest {
 
     private UsersPage usersPage;
     private CategoriesPage catPage;
+    private SkillsPage skillsPage;
 
     public AdminManagerTest() {
         extent = new ExtentReports();
@@ -88,7 +90,7 @@ public class AdminManagerTest {
 
     @Test (priority = 5)
     public void categoryClikability() {
-        catPage = new CategoriesPage(driver, test, logger);
+        catPage = new CategoriesPage(driver, logger);
         catPage.checkUserBtnClikability();
     }
     @Test (priority = 6)
@@ -104,5 +106,22 @@ public class AdminManagerTest {
     @Test (priority = 8)
     public void delLastCategory() {
         catPage.delLastCat();
+    }
+
+    @Test (priority = 9)
+    public void checkClikabilityOfSkill() {
+        skillsPage = new SkillsPage(driver, logger);
+        Util.implicitWait(driver,2000);
+        skillsPage.checkClikability();
+    }
+
+    @Test (priority = 10)
+    public void addNewSkill() {
+        skillsPage.addNewSkill();
+    }
+
+    @Test (priority = 11)
+    public void delLastSkill() {
+        skillsPage.delLastSkill();
     }
 }
