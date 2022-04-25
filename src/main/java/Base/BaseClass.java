@@ -7,6 +7,19 @@ import java.io.FileInputStream;
 import java.util.Properties;
 
 public class BaseClass {
+
+    public static Properties data;
+    static {
+        try{
+            data = new Properties();
+            FileInputStream ip=new FileInputStream(System.getProperty("user.dir") + "\\src\\main\\java\\config\\config.properties");
+            data.load(ip);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
     public static Properties prop;
     static {
         try{

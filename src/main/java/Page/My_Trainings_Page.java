@@ -1,5 +1,6 @@
 package Page;
 
+import Base.BaseClass;
 import Helper.Util;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -120,19 +121,19 @@ public class My_Trainings_Page {
         String next_status = driver.findElement(status_state).getText();
 
 
-        if((cur_status == "running") && (next_status == "assignment")){
+        if((cur_status == BaseClass.data.getProperty("status1")) && (next_status == BaseClass.data.getProperty("status2"))){
             System.out.println("Pass");
         }
 
-        else if ((cur_status == "assignment") && (next_status == "evaluating")){
+        else if ((cur_status == BaseClass.data.getProperty("status2")) && (next_status == BaseClass.data.getProperty("status3"))){
             System.out.println("Pass");
         }
 
-        else if ((cur_status == "evaluating") && (next_status == "completed")){
+        else if ((cur_status == BaseClass.data.getProperty("status3")) && (next_status == BaseClass.data.getProperty("status4"))){
             System.out.println("Pass");
         }
 
-        else if ((cur_status == "completed")){
+        else if ((cur_status == BaseClass.data.getProperty("status4"))){
             System.out.println("Pass");
         }
 

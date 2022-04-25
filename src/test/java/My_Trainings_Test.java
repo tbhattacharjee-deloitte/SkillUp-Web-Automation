@@ -11,7 +11,7 @@ public class My_Trainings_Test {
     WebDriver driver;
     String username = BaseClass.prop.getProperty("user_username");
     String password = BaseClass.prop.getProperty("user_password");
-    String name = "user_name";
+    String name = BaseClass.prop.getProperty("user_name");;
 
 
     @BeforeTest
@@ -32,7 +32,8 @@ public class My_Trainings_Test {
 
     @Test (priority = 2)
     void search_filter_name() throws InterruptedException {
-        String skill_name = "Somnath";
+        String skill_name = BaseClass.data.getProperty("name");
+
         My_Trainings_Page.search(driver,skill_name,"name");
 
         driver.navigate().refresh();
@@ -41,7 +42,7 @@ public class My_Trainings_Test {
     @Test (priority = 3)
     void search_filter_skill() throws InterruptedException {
         Util.zoomout(driver);
-        String trainee_name = "Java";
+        String trainee_name = BaseClass.data.getProperty("skill");
         Thread.sleep(3000);
         My_Trainings_Page.search(driver,trainee_name,"skill");
 
@@ -66,7 +67,7 @@ public class My_Trainings_Test {
 
     @Test (priority = 7)
     void adding_reference() throws InterruptedException {
-        My_Trainings_Page.add_reference(driver,"youtube","www.youtube.com");
+        My_Trainings_Page.add_reference(driver,BaseClass.data.getProperty("context"),BaseClass.data.getProperty("reference"));
     }
 
 }
