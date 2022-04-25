@@ -1,4 +1,5 @@
 import Base.BaseClass;
+import Page.Login;
 import Page.LoginPageXLSInfo;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -13,10 +14,15 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
+
+import static Base.BaseClass.prop;
+import static org.testng.Reporter.clear;
 
 public class TestLogin {
     WebDriver driver;
+
 
     @BeforeClass
     public void setup() {
@@ -26,46 +32,51 @@ public class TestLogin {
 
 
     @Test(dataProvider = "LoginData")
-    public void loginTest(String user, String pwd, String exp) {
+    public void loginTest(String user, String pwd, String exp) throws InterruptedException  {
 
-        WebElement txtUserName = driver.findElement(By.xpath("//input[@placeholder='Enter your username']"));
-        txtUserName.sendKeys(user);
+        Login.login(driver, user,pwd);
 
-        WebElement txtPassword = driver.findElement(By.xpath("//input[@placeholder='Enter your password']"));
-        txtPassword.sendKeys(pwd);
-
-
-        //Login  button
-        driver.findElement(By.xpath("/html/body/app-root/app-login-page/div/form/div/div[3]")).click();
-
-        WebDriverWait wait = new WebDriverWait(driver, 20);
-        wait.until(ExpectedConditions.alertIsPresent());
-        Alert alert = driver.switchTo().alert();
-        alert.accept();
 
         String exp_title ="Home";
-        String act_title = driver.findElement(By.xpath("/html/body/app-root/app-sidenav/div/div[2]/app-landing-page/p")).getText();
-
-
-
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(5000));
+        WebElement home = driver.findElement(By.xpath("/html/body/app-root/app-sidenav/div/div[2]/app-landing-page/p"));
+        String act_title=home.getText();
 
         if (exp.equals("Valid")) {
             if (exp_title.equals(act_title)) {
-                driver.findElement(By.xpath("/html/body/app-root/app-sidenav/app-header/div/div/button/img")).click();
+                System.out.println("actual title is" + act_title);
+                driver.findElement(By.xpath("/html/body/app-root/app-sidenav/app-header/div/div/button")).click();
                 driver.findElement(By.xpath("/html/body/app-root/app-sidenav/app-header/div/div/div[2]/ul/li[2]/a")).click();
+                driver.navigate().refresh();
                 Assert.assertTrue(true);
             } else {
                 Assert.assertTrue(false);
             }
         } else if (exp.equals("Invalid")) {
             if (exp_title.equals(act_title)) {
-                driver.findElement(By.xpath("/html/body/app-root/app-sidenav/app-header/div/div/button/img")).click();
+                driver.findElement(By.xpath("/html/body/app-root/app-sidenav/app-header/div/div/button")).click();
                 driver.findElement(By.xpath("/html/body/app-root/app-sidenav/app-header/div/div/div[2]/ul/li[2]/a")).click();
+                driver.navigate().refresh();
                 Assert.assertTrue(false);
             } else {
+                WebDriverWait wait = new WebDriverWait(driver, 20);
+                wait.until(ExpectedConditions.alertIsPresent());
+                Alert alt=driver.switchTo().alert();
+                Thread.sleep(5000);
+                alt.accept();
+                Thread.sleep(5000);
+                driver.get(prop.getProperty("url"));
+
+                //driver.navigate().to(driver.getCurrentURL());
                 Assert.assertTrue(true);
             }
         }
+        /*WebElement txtUserName = driver.findElement(By.xpath("//input[@placeholder='Enter your username']"));
+        txtUserName.clear();
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
+        WebElement txtPassword = driver.findElement(By.xpath("//input[@placeholder='Enter your password']"));
+        txtPassword.clear();*/
+
 
     }
 

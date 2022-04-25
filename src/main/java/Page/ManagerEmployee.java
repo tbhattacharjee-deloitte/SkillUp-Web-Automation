@@ -24,7 +24,6 @@ public class ManagerEmployee {
 
     //checking employee button functionality
     public static void goto_employee(WebDriver driver){
-        driver.navigate().refresh();
         Util.jsClick(driver,employee_btn);
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
 

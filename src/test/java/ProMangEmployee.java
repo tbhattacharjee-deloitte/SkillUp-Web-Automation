@@ -41,7 +41,8 @@ public class ProMangEmployee {
         String name = "Vivek";
         ManagerEmployee.searchBy(driver,name,"Name");
 
-        driver.navigate().refresh();
+       driver.navigate().refresh();
+
     }
 
     @Test (priority = 3)
@@ -50,6 +51,7 @@ public class ProMangEmployee {
         ManagerEmployee.searchBy(driver,designation,"Designation");
 
         driver.navigate().refresh();
+
     }
 
 
@@ -59,6 +61,7 @@ public class ProMangEmployee {
         ManagerEmployee.searchBy(driver,exper,"Experience");
 
         driver.navigate().refresh();
+
     }
     @Test (priority = 5)
     void actionIcon(){
