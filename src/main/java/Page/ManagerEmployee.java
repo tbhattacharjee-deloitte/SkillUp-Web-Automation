@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
+import java.io.IOException;
 import java.time.Duration;
 
 
@@ -21,6 +22,16 @@ public class ManagerEmployee {
     static By searched_name =By.xpath("/html/body/app-root/app-sidenav/div/div[2]/app-employees/div/div/table/tbody/tr/td[1]");
     static By searched_desigantion =By.xpath("/html/body/app-root/app-sidenav/div/div[2]/app-employees/div/div/table/tbody/tr[1]/td[2]");
     static By searched_experience =By.xpath("/html/body/app-root/app-sidenav/div/div[2]/app-employees/div/div/table/tbody/tr[1]/td[3]");
+
+
+    //Taking user credential of Project Manager from excel sheet
+    public static void data_manager(WebDriver driver) throws IOException {
+        LoginPageXLSInfo xlUtil = new LoginPageXLSInfo("C:\\Users\\sweetasingh\\SkillUp-Web-Automation\\src\\main\\resources\\LoginData.xlsx");
+        String manage_username=xlUtil.getCellData("Sheet1", 5, 0);
+        String manage_password=xlUtil.getCellData("Sheet1", 5, 1);
+        Login.login(driver, manage_username,manage_password);
+
+    }
 
     //checking employee button functionality
     public static void goto_employee(WebDriver driver){
