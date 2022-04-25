@@ -50,7 +50,7 @@ public class HomePageTraineeTest {
         String date = "2022-05-15";
         HomePageTrainee.EnterStartDate(driver, date);
         String val = ((JavascriptExecutor)driver).executeScript("return document.getElementsByTagName('input')[0].value").toString();
-        System.out.println(val);
+//        System.out.println(val);
         assert date.equals(val);
 //        Thread.sleep(3000);
     }
@@ -81,7 +81,7 @@ public class HomePageTraineeTest {
         String duration = "2";
         HomePageTrainee.EnterDuration(driver, duration);
         String val = ((JavascriptExecutor)driver).executeScript("return document.getElementsByTagName('input')[3].value").toString();
-        System.out.println(val);
+//        System.out.println(val);
         assert duration.equals(val);
     }
 

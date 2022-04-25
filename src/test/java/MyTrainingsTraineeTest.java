@@ -2,6 +2,7 @@ import Base.BaseClass;
 import Page.Login;
 import Page.MyTrainingsTrainee;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.AfterTest;
@@ -44,6 +45,13 @@ public class MyTrainingsTraineeTest {
         assert key.equals(skill);
     }
     @Test(priority = 3)
+    void CheckStatus() throws Exception{
+        driver.navigate().refresh();
+        Thread.sleep(3000);
+        String status = ((JavascriptExecutor)driver).executeScript("return document.getElementsByTagName('td')[2].innerText").toString();
+        System.out.println(status);
+    }
+    @Test(priority = 3)
     void ClickLearn() throws Exception{
         driver.navigate().refresh();
         Thread.sleep(3000);
@@ -59,7 +67,10 @@ public class MyTrainingsTraineeTest {
     @Test(priority = 4)
     void MessageBox(){
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-        MyTrainingsTrainee.ChatBox(driver, "some message");
+        String message = "some message";
+        MyTrainingsTrainee.ChatBox(driver, message);
+        String val = ((JavascriptExecutor)driver).executeScript("return document.getElementsByTagName('input')[0].value").toString();
+        assert val.equals(message);
     }
     @Test(priority = 5)
     void Send() {
