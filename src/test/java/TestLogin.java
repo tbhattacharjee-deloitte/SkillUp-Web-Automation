@@ -30,7 +30,7 @@ public class TestLogin {
 
     //Looping through every scenario for Login
     @Test(dataProvider = "LoginData")
-    public void loginTest(String user, String pwd, String exp) {
+    public void loginTest(String user, String pwd, String exp) throws InterruptedException {
 
         //Login using credentials from excel
         Login.login(driver, user, pwd);

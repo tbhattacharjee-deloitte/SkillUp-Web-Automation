@@ -23,7 +23,7 @@ public class ProMangEmployee {
     }
 
     @BeforeTest
-    void login() throws IOException {
+    void login() throws IOException, InterruptedException {
         driver = BaseClass.init();
         ManagerEmployee.data_manager(driver);
         Util.explicitWait_visibility(driver, 5000, profileDivPath);

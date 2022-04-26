@@ -25,7 +25,7 @@ public class ManagerEmployee {
 
 
     //Taking user credential of Project Manager from excel sheet
-    public static void data_manager(WebDriver driver) throws IOException {
+    public static void data_manager(WebDriver driver) throws IOException, InterruptedException {
         LoginPageXLSInfo xlUtil = new LoginPageXLSInfo("C:\\Users\\sweetasingh\\SkillUp-Web-Automation\\src\\main\\resources\\LoginData.xlsx");
         String manage_username=xlUtil.getCellData("Sheet1", 5, 0);
         String manage_password=xlUtil.getCellData("Sheet1", 5, 1);
