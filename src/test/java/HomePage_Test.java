@@ -26,7 +26,7 @@ public class HomePage_Test{
         HomePage.login(driver,username,password);
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
 
-//        Thread.sleep(3000);
+//        HomePage.page_wait();
     }
 
     @Test (priority = 1)
@@ -36,7 +36,7 @@ public class HomePage_Test{
         driver.navigate().refresh();
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
 
-//        Thread.sleep(3000);
+
         driver.navigate().refresh();
     }
 
@@ -73,7 +73,7 @@ public class HomePage_Test{
 
         Util.zoomout(driver);
         String trainee_name = "HTML";
-        Thread.sleep(3000);
+        HomePage.page_wait();
         HomePage.search(driver,trainee_name,"skill");
 
         driver.navigate().refresh();
@@ -83,14 +83,14 @@ public class HomePage_Test{
     @Test (priority = 7)
     void next_page() throws InterruptedException {
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
-        Thread.sleep(3000);
+        HomePage.page_wait();
         HomePage.navigate(driver,"next");
     }
 
 
     @Test (priority = 8)
     void prev_page() throws InterruptedException {
-        Thread.sleep(3000);
+        HomePage.page_wait();
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
         HomePage.navigate(driver,"prev");
     }
@@ -107,7 +107,7 @@ public class HomePage_Test{
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
         HomePage.delete_skill_req(driver,username);
 
-        Thread.sleep(3000);
+        HomePage.page_wait();
         HomePage.goto_home(driver);
     }
 
@@ -115,7 +115,7 @@ public class HomePage_Test{
     @Test (priority = 11)
     void BecomeTraineeTest() throws Exception{
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(5000));
-        Thread.sleep(3000);
+        HomePage.page_wait();
         driver.navigate().refresh();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         HomePage.BecomeTraineeButton(driver);
@@ -142,7 +142,7 @@ public class HomePage_Test{
     void StartDateTest() throws Exception{
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(5000));
         HomePage.EnterStartDate(driver, "2022-05-15");
-        Thread.sleep(3000);
+        HomePage.page_wait();
     }
 
     @Test(priority = 15)
@@ -167,7 +167,7 @@ public class HomePage_Test{
     void CreateRequestTest() throws Exception{
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(5000));
         HomePage.ClickCreateButton(driver);
-        Thread.sleep(3000);
+        HomePage.page_wait();
         String ActualURL = driver.getCurrentUrl();
         String ExpectedURL = "https://hu-monitorapp-front-urtjok3rza-wl.a.run.app/request-page";
         assert ActualURL.equals(ExpectedURL);
