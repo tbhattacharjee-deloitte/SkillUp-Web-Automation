@@ -47,7 +47,7 @@ public class AdminManagerTest {
 
     @BeforeTest
     @Parameters({"username", "password"})
-    public void login(String username, String password) {
+    public void login(String username, String password) throws InterruptedException {
         // initialize driver
         driver = BaseClass.init();
         // login

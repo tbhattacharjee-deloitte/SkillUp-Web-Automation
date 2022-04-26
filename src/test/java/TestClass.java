@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 public class TestClass {
     WebDriver driver;
     @BeforeTest
-    void login() {
+    void login() throws InterruptedException {
         driver = BaseClass.init();
         Login.login(driver,"mentorAdmin", "abc123");
     }
