@@ -40,12 +40,16 @@ public class Categories {
 
     }
     public static void fillvalue(WebDriver driver, String key, String date, String duration,String starttime, String endtime){
+
         Util.click(driver.findElement(createrequest));
+
         Util.click(driver.findElement(selectreact));
 
         Util.sendKey(driver.findElement(discription),key);
 
         Util.sendKey(driver.findElement(selectdate),date);
+
+        Util.zoomout(driver);
 
         Util.sendKey(driver.findElement(start_time),starttime);
 
@@ -53,10 +57,9 @@ public class Categories {
 
 
         Util.sendKey(driver.findElement(Durationadd),duration);
+
         Util.zoomout(driver);
 
-//        Actions act=new Actions(driver);
-//        act.moveToElement(driver.findElement(By.xpath("//button[@class='req-button']"))).doubleClick();
         Util.jsClick(driver,createbtn);
 
     }
