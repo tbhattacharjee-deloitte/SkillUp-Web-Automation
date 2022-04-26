@@ -32,7 +32,7 @@ public class Categorytest {
     @Test(priority = 2)
     void fillvaluetest() throws IOException {
         Categories.category(driver);
-        File file = new File("src/test/resources/categoryReqData.xlsx");
+        File file = new File(System.getProperty("user.dir")+"/src/test/resources/categoryReqData.xlsx");
         FileInputStream inputStream = new FileInputStream(file);
         XSSFWorkbook wb=new XSSFWorkbook(inputStream);
         XSSFSheet sheet=wb.getSheet("categoryReqData");
