@@ -3,6 +3,7 @@ package Page;
 import Helper.Util;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 
 import java.time.Duration;
@@ -109,27 +110,33 @@ public class HomePage {
     public static void search(WebDriver driver,String search_name,String head){
         Util.sendKey(driver.findElement(search_box), search_name);
 
-        // Checking the search name functionality
-        if(head.equals("name")) {
-            String appearing_name = driver.findElement(first_name).getText();
-            System.out.println(appearing_name);
-            if (appearing_name.equals(search_name)) {
-                System.out.println("Search Successful");
-            } else {
-                System.out.println("Search Unsuccessful");
+        try {
+            // Checking the search name functionality
+            if (head.equals("name")) {
+                String appearing_name = driver.findElement(first_name).getText();
+                System.out.println(appearing_name);
+                if (appearing_name.equals(search_name)) {
+                    System.out.println("Search Successful");
+                } else {
+                    System.out.println("Search Unsuccessful");
+                }
+            }
+
+
+            // Checking the search skill functionality
+            if (head.equals("skill")) {
+                String appearing_name = driver.findElement(skill_name).getText();
+                System.out.println(appearing_name);
+                if (appearing_name.equals(search_name)) {
+                    System.out.println("Search Successful");
+                } else {
+                    System.out.println("Search Unsuccessful");
+                }
             }
         }
 
-
-        // Checking the search skill functionality
-        if(head.equals("skill")){
-            String appearing_name = driver.findElement(skill_name).getText();
-            System.out.println(appearing_name);
-            if (appearing_name.equals(search_name)) {
-                System.out.println("Search Successful");
-            } else {
-                System.out.println("Search Unsuccessful");
-            }
+        catch (Exception e){
+            System.out.println("Empty Skill");
         }
     }
 
@@ -177,12 +184,26 @@ public class HomePage {
 
     // Accept skill to train functionality
     public static void accept_skill(WebDriver driver, String name) throws InterruptedException {
+        Boolean info_true, accept_true = false;
 
-        Util.jsClick(driver, info_btn);
-        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
+        try {
+            info_true = driver.findElement(info_btn).isDisplayed();
+        }catch (NoSuchElementException e){
+            info_true = false ;
+        }
+
+        if (info_true == true) {
+            Util.jsClick(driver, info_btn);
+            driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
+        }
 
 //        page_wait();
-        Boolean accept_true = driver.findElement(accept_btn).isDisplayed();
+        try {
+            accept_true = driver.findElement(accept_btn).isDisplayed();
+        }catch (NoSuchElementException e){
+            accept_true = false ;
+        }
+
         System.out.println(accept_true);
 
         if (accept_true == true) {
@@ -197,9 +218,16 @@ public class HomePage {
 
     // Delete the user's skill request
     public static void delete_skill_req(WebDriver driver,String name) throws InterruptedException {
+
+        Boolean del_present = false;
         Util.sendKey(driver.findElement(search_box), name);
 
-        Boolean del_present = driver.findElement(del_btn).isDisplayed();
+        try {
+            del_present = driver.findElement(del_btn).isDisplayed();
+        }catch (NoSuchElementException e){
+            del_present = false ;
+        }
+
         System.out.println("Delete button present : "+del_present);
 
         if(del_present.equals("true")){

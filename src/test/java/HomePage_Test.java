@@ -116,6 +116,8 @@ public class HomePage_Test{
     void BecomeTraineeTest() throws Exception{
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(5000));
         HomePage.page_wait();
+        HomePage.goto_home(driver);
+        HomePage.page_wait();
         driver.navigate().refresh();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         HomePage.BecomeTraineeButton(driver);
