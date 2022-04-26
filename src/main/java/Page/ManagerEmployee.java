@@ -90,7 +90,7 @@ public class ManagerEmployee {
         js.executeScript("document.body.style.zoom='50%'");
 
         String range = driver.findElement(pagination_range).getText();
-        int total = Integer.parseInt(range.substring(range.length()-2).strip());
+        int total = Integer.parseInt(range.substring(range.length()-2).trim());
 
         if (total > 5) {
             //Next Page button
@@ -144,10 +144,10 @@ public class ManagerEmployee {
 
         //validating the number of data being displaying
         String range = driver.findElement(pagination_range).getText();
-        int total = Integer.parseInt(range.substring(range.length()-2).strip());
+        int total = Integer.parseInt(range.substring(range.length()-2).trim());
 
         if(total > number){
-            int display_num = Integer.parseInt(range.substring(4,6).strip());
+            int display_num = Integer.parseInt(range.substring(4,6).trim());
 
             if(display_num == number){
                 System.out.println("Pass");
