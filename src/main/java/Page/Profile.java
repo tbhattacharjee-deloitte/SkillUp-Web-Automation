@@ -11,7 +11,8 @@ import java.time.Duration;
 public class Profile {
     static By profileIcon=By.xpath("//img[@class='drop-icon']");
     static By profiletext=By.xpath("//a[@routerlink='./../profile']");
-    static By verifyName=By.xpath("//td[normalize-space()='Vivek']");
+//    static By verifyName=By.xpath("//td[normalize-space()='Vivek']");
+    static By verifyName=By.xpath("    //p[@class='name']");
     public static String actualname;
     public static  String expectedname;
     public static void profileview(WebDriver driver)  {
