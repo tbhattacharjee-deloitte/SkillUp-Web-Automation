@@ -17,10 +17,7 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Listeners;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,12 +46,13 @@ public class AdminManagerTest {
     }
 
     @BeforeTest
-    public void login() {
+    @Parameters({"username", "password"})
+    public void login(String username, String password) {
         // initialize driver
         driver = BaseClass.init();
         // login
-        ArrayList<String> admin = ExtractData.getAdminDetails();
-        Login.login(driver,admin.get(0), admin.get(1));
+//        ArrayList<String> admin = ExtractData.getAdminDetails();
+        Login.login(driver,username, password);
         // refresh
         Util.explicitWait_visibility(driver, 5000, profileDivPath);
         driver.navigate().refresh();
