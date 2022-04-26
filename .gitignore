@@ -1,0 +1,4 @@
+logs
+extent.html
+target/test-classes/log4j2.xml
+src/test/resources/

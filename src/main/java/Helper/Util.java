@@ -17,8 +17,17 @@ public class Util {
     public static void sendKey(WebElement ele, String key) {
         ele.sendKeys(key);
     }
+
+    public static void sendKey(WebDriver driver, By xpath, String key) {
+        sendKey(driver.findElement(xpath), key);
+    }
+
     public static void click(WebElement ele) {
         ele.click();
+    }
+
+    public static void click(WebDriver driver, By xpath) {
+        click(driver.findElement(xpath));
     }
 
     public static void jsClick(WebDriver driver, By xpath) {
@@ -36,5 +45,15 @@ public class Util {
     public static void expectedWait_toClick(WebDriver driver, int milsec, By xpath) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(2000));
         wait.until(ExpectedConditions.elementToBeClickable(xpath)).click();
+    }
+    public static By getReplacedXpath(String original, String toReplace) {
+        return By.xpath(original.replace("%s", toReplace));
+    }
+    public static void threadSleep(int milsec) {
+        try {
+            Thread.sleep(milsec);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
