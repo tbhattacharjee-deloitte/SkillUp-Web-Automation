@@ -98,7 +98,7 @@ public class ManagerEmployee {
                 Util.jsClick(driver, next_page_btn);
                 driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
 
-                Thread.sleep(3000);
+                Util.threadSleep(3000);
                 int num = Integer.parseInt((driver.findElement(pagination_range).getText()).substring(0, 1));
                 if (num == 6) {
                     System.out.println("Successful");
@@ -113,7 +113,7 @@ public class ManagerEmployee {
                 Util.jsClick(driver, prev_page_btn);
                 driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
 
-                Thread.sleep(3000);
+                Util.threadSleep(3000);
                 int num = Integer.parseInt((driver.findElement(pagination_range).getText()).substring(0, 1));
                 if (num == 1) {
                     System.out.println("Successful");
@@ -139,7 +139,7 @@ public class ManagerEmployee {
         Util.jsClick(driver,drop_down_number);
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
 
-        Thread.sleep(3000);
+        Util.threadSleep(3000);
 
 
         //validating the number of data being displaying

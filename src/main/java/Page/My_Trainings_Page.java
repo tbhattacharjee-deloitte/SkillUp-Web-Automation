@@ -78,7 +78,7 @@ public class My_Trainings_Page {
     public static void search(WebDriver driver,String search_name,String head) throws InterruptedException {
         Util.sendKey(driver.findElement(search_box), search_name);
 
-        page_wait();
+        Util.threadSleep(3000);
 
         if(head.equals("name")) {
             String appearing_name = driver.findElement(first_name).getText();
@@ -100,13 +100,13 @@ public class My_Trainings_Page {
             }
 
             if(head.equals("status")) {
-                page_wait();
+                Util.threadSleep(3000);
             }
         }
     }
 
 
-    public static void page_wait()throws InterruptedException {
+    public static void page_sleep()throws InterruptedException {
         Thread.sleep(3000);
     }
 
@@ -131,7 +131,7 @@ public class My_Trainings_Page {
     // Checking if the status is being updated properly
     public static void status_update(WebDriver driver) throws InterruptedException {
 
-        page_wait();
+        Util.threadSleep(3000);
         String cur_status = driver.findElement(status_state).getText();
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
 
@@ -168,7 +168,7 @@ public class My_Trainings_Page {
         Util.sendKey(driver.findElement(reference), reference_str);
 
         Util.jsClick(driver,add_ref_btn);
-        page_wait();
+        Util.threadSleep(3000);
 
         String appearing_context = driver.findElement(By.xpath("//div[@class='bar']//h2")).getText();
         String appearing_reference = driver.findElement(By.xpath("//div[@class='left-container']//div[1]//div[1]//a[1]")).getText();
@@ -182,9 +182,9 @@ public class My_Trainings_Page {
 
     public static void send_message(WebDriver driver) throws InterruptedException {
         Util.sendKey(driver.findElement(message_box),BaseClass.data.getProperty("message"));
-        page_wait();
+        Util.threadSleep(3000);
         Util.jsClick(driver,send_msg);
-        page_wait();
+        Util.threadSleep(3000);
     }
 
 

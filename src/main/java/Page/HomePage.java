@@ -55,7 +55,7 @@ public class HomePage {
 
     public static void goto_home(WebDriver driver) throws InterruptedException {
         Util.jsClick(driver,home_btn);
-        page_wait();
+        Util.threadSleep(3000);
     }
 
     //Navigating to Become a trainer page
@@ -75,13 +75,13 @@ public class HomePage {
         Util.jsClick(driver,initiation);
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
 
-//        page_wait();
+//        Util.threadSleep(3000);
 
         //selecting the number from dropdown
         Util.jsClick(driver,initiation_number);
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
 
-        page_wait();
+        Util.threadSleep(3000);
 
 
         //zoom-out to fit the data in the screen
@@ -155,7 +155,7 @@ public class HomePage {
                 Util.jsClick(driver, next_page_btn);
                 driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
 
-                page_wait();
+                Util.threadSleep(3000);
                 int num = Integer.parseInt((driver.findElement(pagination_range).getText()).substring(0, 1));
                 if (num == 6) {
                     System.out.println("Successful");
@@ -170,7 +170,7 @@ public class HomePage {
                 Util.jsClick(driver, prev_page_btn);
                 driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
 
-                page_wait();
+                Util.threadSleep(3000);
                 int num = Integer.parseInt((driver.findElement(pagination_range).getText()).substring(0, 1));
                 if (num == 1) {
                     System.out.println("Successful");
@@ -197,7 +197,7 @@ public class HomePage {
             driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
         }
 
-//        page_wait();
+//        Util.threadSleep(3000);
         try {
             accept_true = driver.findElement(accept_btn).isDisplayed();
         }catch (NoSuchElementException e){
@@ -234,7 +234,7 @@ public class HomePage {
             Util.jsClick(driver,del_btn);
             driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
 
-            page_wait();
+            Util.threadSleep(3000);
 
             Util.jsClick(driver,del_yes);
         }
