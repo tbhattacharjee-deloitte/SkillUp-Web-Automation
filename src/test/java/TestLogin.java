@@ -28,7 +28,7 @@ public class TestLogin {
     public void loginTest(String user, String pwd, String exp) throws InterruptedException {
 
         //Login using credentials from excel
-        Login.login(driver, user, pwd);
+        LoginScenario.login(driver, user, pwd);
 
         if (exp.equals("Valid")) {
             String exp_title = "Home";
@@ -56,7 +56,7 @@ public class TestLogin {
     public String[][] getData() throws IOException {
 
         //Getting the data from excel
-        LoginPageXLSInfo xlUtil = new LoginPageXLSInfo("C:\\Users\\sweetasingh\\SkillUp-Web-Automation\\src\\main\\resources\\LoginData.xlsx");
+        LoginPageXLSInfo xlUtil = new LoginPageXLSInfo(System.getProperty("user.dir")+"\\src\\main\\resources\\LoginData.xlsx");
 
         int totalRows = xlUtil.getRowCount("Sheet1");
         int totalCols = xlUtil.getCellCount("Sheet1", 1);

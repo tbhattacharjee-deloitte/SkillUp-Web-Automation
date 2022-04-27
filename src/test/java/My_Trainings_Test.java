@@ -22,7 +22,7 @@ public class My_Trainings_Test {
     void login() throws InterruptedException {
         driver = BaseClass.init();
         My_Trainings_Page.login(driver,username,password);
-        My_Trainings_Page.page_wait();
+        Util.threadSleep(3000);
     }
 
     @Test (priority = 1)
@@ -30,7 +30,7 @@ public class My_Trainings_Test {
         My_Trainings_Page.goto_as_a_trainer(driver);
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
         driver.navigate().refresh();
-        My_Trainings_Page.page_wait();
+        Util.threadSleep(3000);
         driver.navigate().refresh();
     }
 
@@ -47,7 +47,7 @@ public class My_Trainings_Test {
     void search_filter_skill() throws InterruptedException {
         Util.zoomout(driver);
         String trainee_name = My_Trainings_Page.get_data("skill");
-        My_Trainings_Page.page_wait();
+        Util.threadSleep(3000);
         My_Trainings_Page.search(driver,trainee_name,"skill");
 
         driver.navigate().refresh();
@@ -79,9 +79,9 @@ public class My_Trainings_Test {
     @Test (priority = 8)
     void send_message_trainer() throws InterruptedException {
         My_Trainings_Page.send_message(driver);
-        My_Trainings_Page.page_wait();
+        Util.threadSleep(3000);
         My_Trainings_Page.goto_as_a_trainer(driver);
-        My_Trainings_Page.page_wait();
+        Util.threadSleep(3000);
     }
 
     @Test (priority = 9)
@@ -102,7 +102,7 @@ public class My_Trainings_Test {
     @Test(priority = 11)
     void SearchBySkills() throws Exception{
         driver.navigate().refresh();
-        My_Trainings_Page.page_wait();
+        Util.threadSleep(3000);
         driver.navigate().refresh();
         String key = "Python";
         My_Trainings_Page.SearchBySkills(driver, key);
@@ -114,7 +114,7 @@ public class My_Trainings_Test {
     @Test(priority = 12)
     void CheckStatus() throws Exception{
         driver.navigate().refresh();
-        My_Trainings_Page.page_wait();
+        Util.threadSleep(3000);
         String status = ((JavascriptExecutor)driver).executeScript("return document.getElementsByTagName('td')[2].innerText").toString();
         System.out.println(status);
     }
@@ -123,10 +123,10 @@ public class My_Trainings_Test {
     @Test(priority = 13)
     void ClickLearn() throws Exception{
         driver.navigate().refresh();
-        My_Trainings_Page.page_wait();
+        Util.threadSleep(3000);
         driver.navigate().refresh();
         My_Trainings_Page.Learn(driver);
-        My_Trainings_Page.page_wait();
+        Util.threadSleep(3000);
         String ActualURL = driver.getCurrentUrl();
         String SubString = ActualURL.substring(0,72);
         String ExpectedSubString = "https://hu-monitorapp-front-urtjok3rza-wl.a.run.app/training?trainingId=";

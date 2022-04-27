@@ -74,7 +74,7 @@ public class ProMangEmployee {
     @Test (priority = 6)
     void next_page() throws InterruptedException {
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
-        Thread.sleep(3000);
+        Util.threadSleep(3000);
 
         ManagerEmployee.checkPageButton(driver,"next");
     }
@@ -82,7 +82,7 @@ public class ProMangEmployee {
 
     @Test (priority = 7)
     void prev_page() throws InterruptedException {
-        Thread.sleep(3000);
+        Util.threadSleep(3000);
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
         ManagerEmployee.checkPageButton(driver,"prev");
     }

@@ -20,12 +20,12 @@ public class Login {
 //        Util.click(driver.findElement(loginBtn));
         Util.jsClick(driver,loginBtn);
 
-//        Thread.sleep(2000);
+//        Util.threadSleep(2000);
     }
 
     public static String actualtext(WebDriver driver) throws InterruptedException {
         driver.navigate().refresh();
-        Thread.sleep(2000);
+        Util.threadSleep(2000);
         return driver.findElement(nameassert).getText();
 
     }
