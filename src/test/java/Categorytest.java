@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.io.File;
@@ -18,10 +19,11 @@ public class Categorytest {
 
     WebDriver driver;
     @BeforeTest
-    void login() throws InterruptedException {
+    @Parameters({"username", "password"})
+    void login(String username, String password) throws InterruptedException {
         driver = BaseClass.init();
-        Login.login(driver,BaseClass.prop.getProperty("username"), BaseClass.prop.getProperty("password"));
-
+//        Login.login(driver,BaseClass.prop.getProperty("username"), BaseClass.prop.getProperty("password"));
+        Login.login(driver, username, password);
     }
     @Test(priority = 1)
     void categoriestest(){

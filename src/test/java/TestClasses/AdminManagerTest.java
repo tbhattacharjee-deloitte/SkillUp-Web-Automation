@@ -46,13 +46,13 @@ public class AdminManagerTest {
     }
 
     @BeforeTest
-    @Parameters({"username", "password"})
-    public void login(String username, String password) throws InterruptedException {
+    @Parameters({"adminUsername", "adminPassword"})
+    public void login(String adminUsername, String adminPassword) throws InterruptedException {
         // initialize driver
         driver = BaseClass.init();
         // login
 //        ArrayList<String> admin = ExtractData.getAdminDetails();
-        Login.login(driver,username, password);
+        Login.login(driver,adminUsername, adminPassword);
         // refresh
         Util.explicitWait_visibility(driver, 5000, profileDivPath);
         driver.navigate().refresh();
