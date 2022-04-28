@@ -1,5 +1,10 @@
 package Base;
 
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -9,6 +14,9 @@ import java.util.Properties;
 public class BaseClass {
 
     public static Properties data;
+    public static ExtentReports extent;
+    public static ExtentTest test;
+    public static Logger logger;
     static {
         try{
             data = new Properties();
@@ -17,6 +25,9 @@ public class BaseClass {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        extent = new ExtentReports();
+        logger = LogManager.getLogger(BaseClass.class.getName());
+        extent.attachReporter(new ExtentHtmlReporter("extent.html"));
     }
 
 

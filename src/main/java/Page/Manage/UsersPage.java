@@ -65,6 +65,7 @@ public class UsersPage {
         action.click(driver.findElement(By.xpath("//label[contains(text(), 'Skills')]"))).perform();
         // create user
         Util.click(driver.findElement(createUserXpath));
+        Util.threadSleep(2000);
     }
 
     public void deleteLastUser(ExtentTest test) {
@@ -80,12 +81,14 @@ public class UsersPage {
             if (s[2].equals(s[4])) break;
             Util.jsClick(driver, nxtPageXpath);
         }
+        Util.threadSleep(2000);
         List<WebElement> lst = driver.findElements(delXpath);
         assert lst.size() > 0;
         logger.debug("List size = " + lst.size());
         WebElement lastItem = lst.get(lst.size()-1);
         Util.click(lastItem);
         test.log(Status.INFO, "Last user is deleted");
+        Util.threadSleep(1000);
     }
 
     private By getReplacedXpath(String original, String toReplace) {

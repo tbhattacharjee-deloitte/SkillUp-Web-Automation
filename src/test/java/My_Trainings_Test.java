@@ -1,18 +1,17 @@
 import Base.BaseClass;
 import Helper.Util;
+import ListenersPackage.Listener;
 import Page.My_Trainings_Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.time.Duration;
 import java.util.List;
 
+@Listeners(Listener.class)
 public class My_Trainings_Test {
     WebDriver driver;
 //    String username = BaseClass.prop.getProperty("user_username");

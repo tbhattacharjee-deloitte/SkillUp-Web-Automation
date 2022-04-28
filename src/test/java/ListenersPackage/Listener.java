@@ -1,35 +1,35 @@
 package ListenersPackage;
 
-import TestClasses.AdminManagerTest;
+import Base.BaseClass;
 import com.aventstack.extentreports.Status;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
-public class AdminManagerListener extends AdminManagerTest implements ITestListener {
+public class Listener implements ITestListener {
     @Override
     public void onTestStart(ITestResult result) {
-        test = super.extent.createTest(result.getMethod().getMethodName());
-        test.log(Status.INFO, "Starting " + result.getMethod().getMethodName() + " Test");
+        BaseClass.test = BaseClass.extent.createTest(result.getMethod().getMethodName());
+        BaseClass.test.log(Status.INFO, "Starting " + result.getMethod().getMethodName() + " Test");
         ITestListener.super.onTestStart(result);
     }
 
     @Override
     public void onTestSuccess(ITestResult result) {
-        test.log(Status.PASS, result.getMethod().getMethodName() + " passed");
+        BaseClass.test.log(Status.PASS, result.getMethod().getMethodName() + " passed");
         ITestListener.super.onTestSuccess(result);
     }
 
     @Override
     public void onTestFailure(ITestResult result) {
-        test.log(Status.FAIL, result.getMethod().getMethodName() + " failed");
+        BaseClass.test.log(Status.FAIL, result.getMethod().getMethodName() + " failed");
         ITestListener.super.onTestFailure(result);
     }
 
     @Override
     public void onFinish(ITestContext context) {
-        test.log(Status.INFO, "Finished Main Test");
-        extent.flush();
+        BaseClass.test.log(Status.INFO, "Finished Main Test");
+        BaseClass.extent.flush();
         ITestListener.super.onFinish(context);
     }
 }

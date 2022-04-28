@@ -1,20 +1,18 @@
 import Base.BaseClass;
-import Helper.Util;
+import ListenersPackage.Listener;
 import Page.Categories;
 import Page.Login;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
+@Listeners(Listener.class)
 public class Categorytest {
 
     WebDriver driver;

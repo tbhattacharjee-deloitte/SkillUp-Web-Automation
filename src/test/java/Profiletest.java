@@ -1,13 +1,12 @@
 import Base.BaseClass;
+import ListenersPackage.Listener;
 import Page.Login;
 import Page.Profile;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
+@Listeners(Listener.class)
 public class Profiletest {
     WebDriver driver;
     @BeforeTest

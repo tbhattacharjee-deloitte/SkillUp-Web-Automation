@@ -1,19 +1,18 @@
 import Base.BaseClass;
 import Helper.Util;
+import ListenersPackage.Listener;
 import Page.Login;
 import Page.ManagerEmployee;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.io.IOException;
 import java.time.Duration;
 
 import static Base.BaseClass.prop;
 
+@Listeners(Listener.class)
 public class ProMangEmployee {
     WebDriver driver;
     By init_5 = By.xpath("//span[@class='mat-option-text'][normalize-space()='5']");

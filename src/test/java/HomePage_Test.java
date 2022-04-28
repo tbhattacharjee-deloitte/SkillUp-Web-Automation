@@ -1,16 +1,15 @@
 import Base.BaseClass;
 import Helper.Util;
+import ListenersPackage.Listener;
 import Page.HomePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.time.Duration;
 
+@Listeners(Listener.class)
 public class HomePage_Test{
     WebDriver driver;
 

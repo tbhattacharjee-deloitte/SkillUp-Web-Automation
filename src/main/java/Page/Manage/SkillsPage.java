@@ -1,7 +1,9 @@
 package Page.Manage;
 
+import Base.BaseClass;
 import Helper.Util;
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -43,9 +45,13 @@ public class SkillsPage {
             if (s[2].equals(s[4])) break;
             Util.jsClick(driver, nxtPageXpath);
         }
-        Util.threadSleep(5000);
-        List<WebElement> list = driver.findElements(delBtn);
-        WebElement last = list.get(list.size() - 1);
-        last.click();
+        Util.threadSleep(2000);
+        List<WebElement> lst = driver.findElements(delBtn);
+        assert lst.size() > 0;
+        logger.debug("List size = " + lst.size());
+        WebElement lastItem = lst.get(lst.size()-1);
+        Util.click(lastItem);
+        BaseClass.test.log(Status.INFO, "Last user is deleted");
+        Util.threadSleep(1000);
     }
 }
