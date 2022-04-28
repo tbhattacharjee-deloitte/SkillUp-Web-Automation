@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="All Test Suite">
+    <parameter name = "username" value="vivek"/>
+    <parameter name="password" value="vivek123"/>
+    <parameter name = "adminUsername" value="mentorAdmin"/>
+    <parameter name="adminPassword" value="abc123"/>
     <test name="admin-manage">
-        <parameter name = "adminUsername" value="mentorAdmin"/>
-        <parameter name="adminPassword" value="abc123"/>
         <classes>
             <class name="TestClasses.AdminManagerTest"/>
         </classes>
@@ -24,13 +26,23 @@
 <!--        </classes>-->
 <!--    </test>-->
 
-    <test name="Logging in with user profile" preserve-order="true">
-        <parameter name = "username" value="vivek"/>
-        <parameter name="password" value="vivek123"/>
+    <test name="Category test">
         <classes>
             <class name="Categorytest"/>
+        </classes>
+    </test>
+    <test name="Home page test">
+        <classes>
             <class name="HomePage_Test"/>
+        </classes>
+    </test>
+    <test name="My Training test">
+        <classes>
             <class name="My_Trainings_Test"/>
+        </classes>
+    </test>
+    <test name="profile test">
+        <classes>
             <class name="Profiletest"/>
         </classes>
     </test>
