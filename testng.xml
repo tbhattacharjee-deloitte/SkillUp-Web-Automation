@@ -24,7 +24,7 @@
 <!--        </classes>-->
 <!--    </test>-->
 
-    <test name="Logging in with user profile" parallel="false" preserve-order="true">
+    <test name="Logging in with user profile" preserve-order="true">
         <parameter name = "username" value="vivek"/>
         <parameter name="password" value="vivek123"/>
         <classes>

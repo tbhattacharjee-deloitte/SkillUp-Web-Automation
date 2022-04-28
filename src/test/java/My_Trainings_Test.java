@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -164,6 +165,11 @@ public class My_Trainings_Test {
         for(int j = 0; j < Sent.size(); j++){
             System.out.println(Sent.get(j).getText());
         }
+    }
+
+    @AfterTest
+    void closeDriver() {
+        driver.close();
     }
 
 }

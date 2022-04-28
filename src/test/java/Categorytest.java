@@ -75,6 +75,6 @@ public class Categorytest {
 
     @AfterTest
     void teardown(){
-        driver.quit();
+        driver.close();
     }
 }
