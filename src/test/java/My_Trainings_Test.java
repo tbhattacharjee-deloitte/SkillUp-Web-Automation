@@ -6,6 +6,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
@@ -13,13 +14,14 @@ import java.util.List;
 
 public class My_Trainings_Test {
     WebDriver driver;
-    String username = BaseClass.prop.getProperty("user_username");
-    String password = BaseClass.prop.getProperty("user_password");
+//    String username = BaseClass.prop.getProperty("user_username");
+//    String password = BaseClass.prop.getProperty("user_password");
     String usr_name = BaseClass.prop.getProperty("user_name");
 
 
     @BeforeTest
-    void login() throws InterruptedException {
+    @Parameters({"username", "password"})
+    void login(String username, String password) throws InterruptedException {
         driver = BaseClass.init();
         My_Trainings_Page.login(driver,username,password);
         Util.threadSleep(3000);

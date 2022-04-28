@@ -1,9 +1,12 @@
 import Base.BaseClass;
 import Helper.Util;
+import Page.Login;
 import Page.ManagerEmployee;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -21,9 +24,10 @@ public class ProMangEmployee {
     }
 
     @BeforeTest
-    void login() throws IOException, InterruptedException {
+    @Parameters({"pmUsername", "pmPassword"})
+    void login(String pmUsername, String pmPassword) throws IOException, InterruptedException {
         driver = BaseClass.init();
-        ManagerEmployee.data_manager(driver);
+        Login.login(driver, pmUsername, pmPassword);
         Util.explicitWait_visibility(driver, 5000, profileDivPath);
         driver.navigate().refresh();
         Util.zoomout(driver);
@@ -99,7 +103,9 @@ public class ProMangEmployee {
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
         ManagerEmployee.page_init(driver,init_10,10);
     }
-
-
+    @AfterTest
+    void closeDriver() {
+        driver.close();
+    }
 
 }

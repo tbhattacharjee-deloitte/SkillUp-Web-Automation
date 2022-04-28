@@ -43,7 +43,7 @@ public class SkillsPage {
             if (s[2].equals(s[4])) break;
             Util.jsClick(driver, nxtPageXpath);
         }
-        Util.threadSleep(3000);
+        Util.threadSleep(5000);
         List<WebElement> list = driver.findElements(delBtn);
         WebElement last = list.get(list.size() - 1);
         last.click();

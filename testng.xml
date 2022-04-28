@@ -8,11 +8,37 @@
             <class name="TestClasses.AdminManagerTest"/>
         </classes>
     </test>
-    <test name="Category test">
+
+<!--    <test name="Category test">-->
+<!--        <parameter name = "username" value="vivek"/>-->
+<!--        <parameter name="password" value="vivek123"/>-->
+<!--        <classes>-->
+<!--            <class name="Categorytest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+<!--    <test name="HomePage test">-->
+<!--        <parameter name = "username" value="vivek"/>-->
+<!--        <parameter name="password" value="vivek123"/>-->
+<!--        <classes>-->
+<!--            <class name="HomePage_Test"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+    <test name="Logging in with user profile" parallel="false" preserve-order="true">
         <parameter name = "username" value="vivek"/>
         <parameter name="password" value="vivek123"/>
         <classes>
             <class name="Categorytest"/>
+            <class name="HomePage_Test"/>
+            <class name="My_Trainings_Test"/>
+            <class name="Profiletest"/>
+        </classes>
+    </test>
+    <test name="Product Manager Login">
+        <parameter name = "pmUsername" value="sangeeta"/>
+        <parameter name = "pmPassword" value="sangeeta123"/>
+        <classes>
+            <class name="ProMangEmployee"/>
         </classes>
     </test>
 </suite>

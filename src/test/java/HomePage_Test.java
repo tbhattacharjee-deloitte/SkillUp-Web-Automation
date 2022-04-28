@@ -4,7 +4,9 @@ import Page.HomePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
@@ -15,13 +17,14 @@ public class HomePage_Test{
     By init_5 = By.xpath("//span[@class='mat-option-text'][normalize-space()='5']");
     By init_10 = By.xpath("//span[normalize-space()='10']");
     By init_15 = By.xpath("//span[@class='mat-option-text'][normalize-space()='15']");
-    String username = "vivek";
-    String password = "vivek123";
+//    String username = "vivek";
+//    String password = "vivek123";
     String name = "vivek";
 
 
     @BeforeTest
-    void login() throws InterruptedException {
+    @Parameters({"username", "password"})
+    void login(String username, String password) throws InterruptedException {
         driver = BaseClass.init();
         HomePage.login(driver,username,password);
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
@@ -103,7 +106,8 @@ public class HomePage_Test{
 
 
     @Test (priority = 10)
-    void delete_skill() throws InterruptedException {
+    @Parameters({"username"})
+    void delete_skill(String username) throws InterruptedException {
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
         HomePage.delete_skill_req(driver,username);
 
@@ -181,11 +185,8 @@ public class HomePage_Test{
 //        HomePage.SearchUser(driver, "Python");
 //        driver.findElement(By.xpath("//tr[2]//td[2]")).getText();
 //    }
-//    @AfterTest
-//    void CloseBrowser(){
-//        driver.close();
-//    }
-    
-    
-
+    @AfterTest
+    void CloseBrowser(){
+        driver.close();
+    }
 }

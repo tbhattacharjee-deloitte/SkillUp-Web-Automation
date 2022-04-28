@@ -25,13 +25,13 @@ public class ManagerEmployee {
 
 
     //Taking user credential of Project Manager from excel sheet
-    public static void data_manager(WebDriver driver) throws IOException, InterruptedException {
-        LoginPageXLSInfo xlUtil = new LoginPageXLSInfo(System.getProperty("user.dir") + "\\src\\main\\resources\\LoginData.xlsx");
-        String manage_username=xlUtil.getCellData("Sheet1", 5, 0);
-        String manage_password=xlUtil.getCellData("Sheet1", 5, 1);
-        Login.login(driver, manage_username,manage_password);
-
-    }
+//    public static void data_manager(WebDriver driver) throws IOException, InterruptedException {
+//        LoginPageXLSInfo xlUtil = new LoginPageXLSInfo(System.getProperty("user.dir") + "\\src\\main\\resources\\LoginData.xlsx");
+//        String manage_username=xlUtil.getCellData("Sheet1", 5, 0);
+//        String manage_password=xlUtil.getCellData("Sheet1", 5, 1);
+//        Login.login(driver, manage_username,manage_password);
+//
+//    }
 
     //checking employee button functionality
     public static void goto_employee(WebDriver driver){
