@@ -18,11 +18,11 @@ public class HomePage_Test{
     By init_15 = By.xpath("//span[@class='mat-option-text'][normalize-space()='15']");
 //    String username = "vivek";
 //    String password = "vivek123";
-    String name = "vivek";
+    String name = "First Admin";
 
 
     @BeforeTest
-    @Parameters({"username", "password"})
+    @Parameters({"adminUsername", "adminPassword"})
     void login(String username, String password) throws InterruptedException {
         driver = BaseClass.init();
         HomePage.login(driver,username,password);
