@@ -7,12 +7,11 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 
 @Listeners(Listener.class)
-public class Profiletest {
-    WebDriver driver;
+public class Profiletest extends BaseClass{
     @BeforeTest
     @Parameters({"username", "password"})
     void login(String username, String password) throws InterruptedException {
-        driver = BaseClass.init();
+        init();
 //        Login.login(driver,BaseClass.prop.getProperty("username"), BaseClass.prop.getProperty("password"));
         Login.login(driver, username, password);
     }

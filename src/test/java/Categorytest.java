@@ -13,13 +13,11 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 @Listeners(Listener.class)
-public class Categorytest {
-
-    WebDriver driver;
+public class Categorytest extends BaseClass {
     @BeforeTest
     @Parameters({"username", "password"})
     void login(String username, String password) throws InterruptedException {
-        driver = BaseClass.init();
+        init();
 //        Login.login(driver,BaseClass.prop.getProperty("username"), BaseClass.prop.getProperty("password"));
         Login.login(driver, username, password);
     }

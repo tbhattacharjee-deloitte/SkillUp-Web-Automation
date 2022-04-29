@@ -1,6 +1,7 @@
 package ListenersPackage;
 
 import Base.BaseClass;
+import Helper.TakeSS;
 import com.aventstack.extentreports.Status;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
@@ -23,6 +24,7 @@ public class Listener implements ITestListener {
     @Override
     public void onTestFailure(ITestResult result) {
         BaseClass.test.log(Status.FAIL, result.getMethod().getMethodName() + " failed");
+        TakeSS.takeSS(result.getMethod().getMethodName());
         ITestListener.super.onTestFailure(result);
     }
 

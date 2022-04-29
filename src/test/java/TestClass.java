@@ -6,11 +6,11 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-public class TestClass {
-    WebDriver driver;
+public class TestClass extends BaseClass {
+
     @BeforeTest
     void login() throws InterruptedException {
-        driver = BaseClass.init();
+        init();
         Login.login(driver,BaseClass.prop.getProperty("username"), BaseClass.prop.getProperty("password"));
 
     }

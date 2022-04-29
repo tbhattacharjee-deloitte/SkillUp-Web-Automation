@@ -13,8 +13,7 @@ import java.time.Duration;
 import static Base.BaseClass.prop;
 
 @Listeners(Listener.class)
-public class ProMangEmployee {
-    WebDriver driver;
+public class ProMangEmployee extends BaseClass{
     By init_5 = By.xpath("//span[@class='mat-option-text'][normalize-space()='5']");
     By init_10 = By.xpath("//span[normalize-space()='10']");
     By profileDivPath = By.xpath("//div[@class='profile']");
@@ -25,7 +24,7 @@ public class ProMangEmployee {
     @BeforeTest
     @Parameters({"pmUsername", "pmPassword"})
     void login(String pmUsername, String pmPassword) throws IOException, InterruptedException {
-        driver = BaseClass.init();
+        init();
         Login.login(driver, pmUsername, pmPassword);
         Util.explicitWait_visibility(driver, 5000, profileDivPath);
         driver.navigate().refresh();

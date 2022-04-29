@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: Categorytest
 -------------------------------------------------------------------------------
-Tests run: 4, Failures: 1, Errors: 0, Skipped: 3, Time elapsed: 0.86 s <<< FAILURE! - in Categorytest
-Categorytest.login  Time elapsed: 0.51 s  <<< FAILURE!
+Tests run: 4, Failures: 1, Errors: 0, Skipped: 3, Time elapsed: 1.044 s <<< FAILURE! - in Categorytest
+Categorytest.login  Time elapsed: 0.633 s  <<< FAILURE!
 org.testng.TestNGException: 
 
 Parameter 'username' is required by BeforeTest on method login but has not been marked @Optional or defined

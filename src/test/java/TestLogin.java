@@ -14,13 +14,11 @@ import org.testng.annotations.Test;
 import java.io.IOException;
 
 
-public class TestLogin {
-    WebDriver driver;
+public class TestLogin extends BaseClass {
 
     @BeforeClass
     public void setup() {
-        driver = BaseClass.init();
-
+        init();
     }
 
     //Looping through every scenario for Login

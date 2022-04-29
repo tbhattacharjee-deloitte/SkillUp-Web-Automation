@@ -10,8 +10,7 @@ import org.testng.annotations.*;
 import java.time.Duration;
 
 @Listeners(Listener.class)
-public class HomePage_Test{
-    WebDriver driver;
+public class HomePage_Test extends BaseClass{
 
     By init_5 = By.xpath("//span[@class='mat-option-text'][normalize-space()='5']");
     By init_10 = By.xpath("//span[normalize-space()='10']");
@@ -24,7 +23,7 @@ public class HomePage_Test{
     @BeforeTest
     @Parameters({"adminUsername", "adminPassword"})
     void login(String username, String password) throws InterruptedException {
-        driver = BaseClass.init();
+        init();
         HomePage.login(driver,username,password);
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
 

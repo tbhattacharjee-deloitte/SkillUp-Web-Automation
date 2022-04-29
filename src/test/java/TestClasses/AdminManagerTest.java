@@ -16,8 +16,7 @@ import org.testng.annotations.*;
 import java.util.List;
 
 @Listeners(Listener.class)
-public class AdminManagerTest {
-    WebDriver driver;
+public class AdminManagerTest extends BaseClass {
     By profileDivPath = By.xpath("//div[@class='profile']");
     By manageBtnPath = By.xpath("//a[text() = 'Manage']");
     By dropdownListPath = By.xpath("//div[@class='next-to-training']/ul/li");
@@ -34,7 +33,7 @@ public class AdminManagerTest {
     @Parameters({"adminUsername", "adminPassword"})
     public void login(String adminUsername, String adminPassword) throws InterruptedException {
         // initialize driver
-        driver = BaseClass.init();
+        init();
         // login
 //        ArrayList<String> admin = ExtractData.getAdminDetails();
         Login.login(driver,adminUsername, adminPassword);

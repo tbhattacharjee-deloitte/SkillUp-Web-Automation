@@ -12,8 +12,7 @@ import java.time.Duration;
 import java.util.List;
 
 @Listeners(Listener.class)
-public class My_Trainings_Test {
-    WebDriver driver;
+public class My_Trainings_Test extends BaseClass{
 //    String username = BaseClass.prop.getProperty("user_username");
 //    String password = BaseClass.prop.getProperty("user_password");
     String usr_name = BaseClass.prop.getProperty("user_name");
@@ -22,7 +21,7 @@ public class My_Trainings_Test {
     @BeforeTest
     @Parameters({"username", "password"})
     void login(String username, String password) throws InterruptedException {
-        driver = BaseClass.init();
+        init();
         My_Trainings_Page.login(driver,username,password);
         Util.threadSleep(3000);
     }

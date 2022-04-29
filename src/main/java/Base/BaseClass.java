@@ -17,6 +17,7 @@ public class BaseClass {
     public static ExtentReports extent;
     public static ExtentTest test;
     public static Logger logger;
+    public static WebDriver driver;
     static {
         try{
             data = new Properties();
@@ -41,14 +42,13 @@ public class BaseClass {
             e.printStackTrace();
         }
     }
-    public static WebDriver init() {
+    public static void init() {
         String browserName=prop.getProperty("browser");
         if(browserName.equals("chrome")){
             System.setProperty("webdriver.chrome.driver",System.getProperty("user.dir") + "\\src\\main\\resources\\chromedriver.exe");
         }
-        WebDriver driver = new ChromeDriver();
+        driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get(prop.getProperty("url"));
-        return driver;
     }
 }
